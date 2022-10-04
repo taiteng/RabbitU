@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "407560665615",
+    "project_id": "rabbitu-ae295",
+    "storage_bucket": "rabbitu-ae295.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407560665615:android:5a239b1edc4768ef23417a",
+        "android_client_info": {
+          "package_name": "com.example.rabbitu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407560665615-4hie262til75rshdgsocquvrqrdnc67k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ333pKXz7_sD0xdUA6LUsCQijA-L2vqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407560665615-4hie262til75rshdgsocquvrqrdnc67k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
