@@ -12,5 +12,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         System.out.print("Test");
+
+
+        System.out.print("Test - ZC");
+
     }
 }
