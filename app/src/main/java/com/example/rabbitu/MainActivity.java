@@ -1,20 +1,21 @@
 package com.example.rabbitu;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.example.rabbitu.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        System.out.print("Test");
-
-
-        System.out.print("Test - ZC");
-
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View v = binding.getRoot();
+        setContentView(v);
     }
 }
