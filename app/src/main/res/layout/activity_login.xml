@@ -52,6 +52,7 @@
                 <EditText
                     android:id="@+id/editTextEmail"
                     style="@style/modifiedEditText"
+                    android:background="@drawable/text_input_shape"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:hint="@string/login_email_hint"/>
@@ -66,6 +67,7 @@
                 <EditText
                     android:id="@+id/editTextPassword"
                     style="@style/modifiedEditText"
+                    android:background="@drawable/text_input_shape"
                     android:hint="@string/login_password_hint"
                     android:maxLines="1"
                     android:inputType="textPassword"/>
