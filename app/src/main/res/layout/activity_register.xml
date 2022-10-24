@@ -64,6 +64,7 @@
                         <EditText
                             android:id="@+id/editTextName"
                             style="@style/modifiedEditText"
+                            android:background="@drawable/text_input_shape"
                             android:inputType="textPersonName"
                             android:maxLines="1"
                             android:hint="Name"/>
@@ -78,6 +79,7 @@
                         <EditText
                             android:id="@+id/editTextEmail"
                             style="@style/modifiedEditText"
+                            android:background="@drawable/text_input_shape"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
                             android:hint="@string/login_email_hint"/>
@@ -92,6 +94,7 @@
                         <EditText
                             android:id="@+id/editTextMobile"
                             style="@style/modifiedEditText"
+                            android:background="@drawable/text_input_shape"
                             android:inputType="phone"
                             android:maxLines="1"
                             android:hint="Mobile Number"/>
@@ -106,6 +109,7 @@
                         <EditText
                             android:id="@+id/editTextPassword"
                             style="@style/modifiedEditText"
+                            android:background="@drawable/text_input_shape"
                             android:hint="@string/login_password_hint"
                             android:maxLines="1"
                             android:inputType="textPassword"/>
