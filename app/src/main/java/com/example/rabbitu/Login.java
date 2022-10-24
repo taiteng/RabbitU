@@ -20,32 +20,23 @@ public class Login extends AppCompatActivity {
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
         setContentView(v);
-//        setContentView(R.layout.activity_login);
 
-//        Button loginBtn = findViewById(R.id.LoginButton);
-//
-//        loginBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(Login.this, MainActivity.class));
-//            }
-//        });
         binding.LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Login.this,MainActivity.class));
+                Intent intent = new Intent(Login.this,MainActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     public void onRegisterClick(View View){
-        startActivity(new Intent(this,Register.class));
+        Intent intent = new Intent(Login.this,Register.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-//    android:onClick="onLoginBtnClick"
-//    public void onLoginBtnClick(View View){
-//        startActivity(new Intent(this,MainActivity.class));
-//    }
 }
