@@ -23,7 +23,15 @@ public class Register extends AppCompatActivity {
         setContentView(v);
         changeStatusBarColor();
 
+        binding.RegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -34,6 +42,8 @@ public class Register extends AppCompatActivity {
     }
 
     public void onLoginClick(View view){
-        startActivity(new Intent(this,Login.class));
+        Intent intent = new Intent(Register.this,Login.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
 }
