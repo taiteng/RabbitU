@@ -50,7 +50,7 @@
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <EditText
-                    android:id="@+id/editTextEmail"
+                    android:id="@+id/editTextEmailLogin"
                     style="@style/modifiedEditText"
                     android:background="@drawable/text_input_shape"
                     android:inputType="textEmailAddress"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="@dimen/loginViewsMargin">
 
                 <EditText
-                    android:id="@+id/editTextPassword"
+                    android:id="@+id/editTextPasswordLogin"
                     style="@style/modifiedEditText"
                     android:background="@drawable/text_input_shape"
                     android:hint="@string/login_password_hint"
@@ -97,6 +97,7 @@
                 android:textSize="17sp"
                 android:text="New user? Register Now"
                 android:layout_marginTop="@dimen/loginViewsMargin"
+                android:id="@+id/registerNow"
                 android:onClick="onRegisterClick"/>
 
             <LinearLayout

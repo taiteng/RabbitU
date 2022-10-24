@@ -1,18 +1,25 @@
 package com.example.rabbitu;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    FirebaseAuth mAuth;
+
 
     BottomNavigationView mBottomNavigationView;
+
 
     HomeFragment mHomeFragment = new HomeFragment();
     BookFragment mBookFragment = new BookFragment();
@@ -20,10 +27,13 @@ public class MainActivity extends AppCompatActivity {
     NotesFragment mNotesFragment = new NotesFragment();
     SettingsFragment mSettingsFragment = new SettingsFragment();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
 
@@ -54,4 +64,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 }

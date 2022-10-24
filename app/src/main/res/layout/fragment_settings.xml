@@ -6,11 +6,11 @@
     tools:context=".SettingsFragment"
     android:background="#00FF1A">
 
-    <TextView
+    <Button
+        android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerInParent="true"
+        android:text="Logout" />
 
 </RelativeLayout>
