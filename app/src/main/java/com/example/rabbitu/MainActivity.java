@@ -1,6 +1,8 @@
 package com.example.rabbitu;
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.MenuItem;
@@ -12,16 +14,32 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
+    final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";
     private static final String TAG = "MainActivity";
+    private static boolean isOngoingTimer;
+    private static boolean isLeavingApp = false;
+    private static boolean isReset = true;
+    public static long mlastStopTime = 0;
+    public static Context currentContext;
+    public static String userID = "";
 
+    DatabaseReference mDatabaseReference;
     FirebaseAuth mAuth;
     BottomNavigationView mBottomNavigationView;
     Animation atg, btgone, btgtwo, btgthree, roundingalone;
@@ -29,10 +47,44 @@ public class MainActivity extends AppCompatActivity {
     Chronometer timerChronometer;
     Button startBtn, stopBtn, resetBtn;
 
+    private boolean isPlayingMusic = false;
+    private String musicAudio = "";
+    MediaPlayer mediaPlayer = new MediaPlayer();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        currentContext = MainActivity.this;
+
+        mediaPlayer.setVolume(0, 0);
+
+        mDatabaseReference = FirebaseDatabase.getInstance(firebaseURL).getReference().child("MusicStorage");
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Retrieve the image for the home page
+
+                //Retrieve the number of coins (currency)
+
+                //Retrieve the audio URL
+                //musicAudio = snapshot.child("Lofi1").child("MusicAudio").getValue(String.class);
+
+                //Set the text with the number of coins
+
+                //Load the image for the home page
+            }
+
+            //Display database error if any
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this, "Unable to connected to database. Please try again. Error: " + error, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        isPlayingMusic = true;
+        musicAudio = "https://firebasestorage.googleapis.com/v0/b/rabbitu-ae295.appspot.com/o/Eric%20Godlow%20Beats%20-%20follow%20me.mp3?alt=media&token=a5723865-1f95-4e46-818d-935192f427f0";
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item1);
@@ -100,14 +152,38 @@ public class MainActivity extends AppCompatActivity {
                     resetBtn.animate().alpha(0).setDuration(300).start();
                 }
 
-                if(timerChronometer.getBase() == 0){
+                if(isReset){
                     timerChronometer.setBase(SystemClock.elapsedRealtime());
                     timerChronometer.start();
                 }
                 else{
-                    long resumeSeconds = timerChronometer.getBase();
-                    timerChronometer.setBase(SystemClock.elapsedRealtime() + resumeSeconds);
+                    long intervalOnPause = (SystemClock.elapsedRealtime() - mlastStopTime);
+                    timerChronometer.setBase(timerChronometer.getBase() + intervalOnPause);
                     timerChronometer.start();
+                    isReset = false;
+                }
+
+                try{
+                    //Pass the audio URL to the Media Player
+                    mediaPlayer.setDataSource(musicAudio);
+                    mediaPlayer.setOnPreparedListener(mp -> {
+                        //Start playing the audio
+                        mp.start();
+
+                        //Loop the audio
+                        mp.setLooping(true);
+
+                        if (isPlayingMusic){
+                            mp.setVolume(1,1);
+                        }
+
+                        else {
+                            mp.setVolume(0,0);
+                        }
+                    });
+                    mediaPlayer.prepare();
+                } catch (IOException e){
+                    e.printStackTrace();
                 }
             }
         });
@@ -118,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 arrowImg.clearAnimation();
 
                 timerChronometer.stop();
+                mlastStopTime = SystemClock.elapsedRealtime();
                 long elapsedMillis = SystemClock.elapsedRealtime() - timerChronometer.getBase();
                 double seconds = elapsedMillis/1000.00;
                 Toast.makeText(MainActivity.this, "Seconds: " + seconds, Toast.LENGTH_SHORT).show();
@@ -125,6 +202,12 @@ public class MainActivity extends AppCompatActivity {
                 startBtn.animate().alpha(1).setDuration(300).start();
                 resetBtn.animate().alpha(1).setDuration(300).start();
                 stopBtn.animate().alpha(0).setDuration(300).start();
+
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = new MediaPlayer();
+
+                isReset = false;
             }
         });
 
@@ -139,6 +222,12 @@ public class MainActivity extends AppCompatActivity {
                 if(stopBtn.getAlpha() == 1){
                     stopBtn.animate().alpha(0).setDuration(300).start();
                 }
+
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = new MediaPlayer();
+
+                isReset = true;
             }
         });
     }
