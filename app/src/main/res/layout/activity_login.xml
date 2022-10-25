@@ -104,7 +104,6 @@
                 android:textSize="17sp"
                 android:text="New user? Register Now"
                 android:layout_marginTop="@dimen/loginViewsMargin"
-                android:id="@+id/registerNow"
                 android:onClick="onRegisterClick"/>
 
             <LinearLayout

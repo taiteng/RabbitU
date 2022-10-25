@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, mHomeFragment).commit();

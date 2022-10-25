@@ -30,12 +30,10 @@ public class Login extends AppCompatActivity {
     private ActivityLoginBinding binding;
     EditText emailLogin ;
     EditText passwordLogin ;
-    TextView registerNowTxt ;
     TextView forgetTxt ;
     Button loginBtn ;
 
     FirebaseAuth mAuth;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,37 +48,16 @@ public class Login extends AppCompatActivity {
         View v = binding.getRoot();
         setContentView(v);
 
-//        binding.LoginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Login.this,MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
-
         emailLogin = findViewById(R.id.editTextEmailLogin);
         passwordLogin = findViewById(R.id.editTextPasswordLogin);
-        registerNowTxt = findViewById(R.id.registerNow);
         loginBtn = findViewById(R.id.LoginButton);
         forgetTxt = findViewById(R.id.forgetpass);
 
-
         mAuth = FirebaseAuth.getInstance();
-
 
         loginBtn.setOnClickListener(view->{
             loginUser();
         });
-
-
-        //Link & Open the register activity
-        registerNowTxt.setOnClickListener(view->{
-            startActivity(new Intent(Login.this,Register.class));
-        });
-
-
 
         //Reset Password through email (check on the spam email)
         forgetTxt.setOnClickListener(new View.OnClickListener() {
@@ -107,10 +84,8 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(Login.this,"Error ! Reset Link Cannot Send : " + e.getMessage(),Toast.LENGTH_SHORT).show();
-
                             }
                         });
-
                     }
                 });
 
@@ -125,10 +100,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
-
-
     }
-
 
     //Validation on the Input Field
     private void loginUser(){
@@ -156,11 +128,7 @@ public class Login extends AppCompatActivity {
                 }
             });
         }
-
-
     }
-
-
 
     //Link & open  to register activity
     public void onRegisterClick(View View){
@@ -168,7 +136,4 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-
-
-
 }
