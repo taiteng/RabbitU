@@ -25,19 +25,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
 
-
-
     FirebaseAuth mAuth;
     EditText name ;
     EditText email ;
     EditText phone ;
     EditText password ;
-
-    TextView loginNow ;
     Button registerBtn ;
-
-
-
 
     private ActivityRegisterBinding binding;
 
@@ -50,48 +43,26 @@ public class Register extends AppCompatActivity {
         setContentView(v);
         changeStatusBarColor();
 
+        name = findViewById(R.id.editTextName);
+        email = findViewById(R.id.editTextEmail);
+        phone = findViewById(R.id.editTextMobile);
+        password = findViewById(R.id.editTextPassword);
 
-
-//        binding.RegisterButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(Register.this,MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-
-
-         name = findViewById(R.id.editTextName);
-         email = findViewById(R.id.editTextEmail);
-         phone = findViewById(R.id.editTextMobile);
-         password = findViewById(R.id.editTextPassword);
-
-         loginNow = findViewById(R.id.onLoginClick);
-         registerBtn = findViewById(R.id.RegisterButton);
-
+        registerBtn = findViewById(R.id.RegisterButton);
 
         mAuth = FirebaseAuth.getInstance();
+
         registerBtn.setOnClickListener(view->{
             createUser();
         });
-
-
-
-        loginNow.setOnClickListener(view->{
-            startActivity(new Intent(Register.this,Login.class));
-        });
-
-
-
-
     }
 
 
-    private  void createUser(){
-         String fullnameTxt = name.getText().toString();
-         String emailTxt = email.getText().toString();
-         String phoneTxt = phone.getText().toString();
-         String passwordTxt = password.getText().toString();
+    private void createUser(){
+        String fullnameTxt = name.getText().toString();
+        String emailTxt = email.getText().toString();
+        String phoneTxt = phone.getText().toString();
+        String passwordTxt = password.getText().toString();
 
 
         if (TextUtils.isEmpty(fullnameTxt)){
@@ -121,19 +92,10 @@ public class Register extends AppCompatActivity {
                     else{
                         Toast.makeText(Register.this,"Registered Error : " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                     }
-
                 }
             });
         }
-
-
-
-
-
     }
-
-
-
 
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -144,15 +106,10 @@ public class Register extends AppCompatActivity {
         }
     }
 
-
-
     //Open back login activity
     public void onLoginClick(View view){
         Intent intent = new Intent(Register.this,Login.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
     }
-
-
-
 }
