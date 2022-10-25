@@ -61,9 +61,6 @@ public class Register extends AppCompatActivity {
 //        });
 
 
-
-
-
          name = findViewById(R.id.editTextName);
          email = findViewById(R.id.editTextEmail);
          phone = findViewById(R.id.editTextMobile);
@@ -83,39 +80,6 @@ public class Register extends AppCompatActivity {
         loginNow.setOnClickListener(view->{
             startActivity(new Intent(Register.this,Login.class));
         });
-
-
-
-
-
-
-//        registerBtn.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                final String fullnameTxt = name.getText().toString();
-//                final String emailTxt = email.getText().toString();
-//                final String phoneTxt = phone.getText().toString();
-//                final String passwordTxt = password.getText().toString();
-//
-//
-//
-//                //validate all the fields before sending the data to firebase
-//                if(fullnameTxt.isEmpty() || emailTxt.isEmpty() || phoneTxt.isEmpty() || passwordTxt.isEmpty()){
-//                    Toast.makeText(Register.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-//                }
-//
-//                else{
-//                    //Send all the fields of data to Firebase Realtime Database
-//
-//                }
-//
-//
-//            }
-//
-//        });
-
-
 
 
 
@@ -155,7 +119,7 @@ public class Register extends AppCompatActivity {
                         startActivity(new Intent(Register.this,Login.class));
                     }
                     else{
-                        Toast.makeText(Register.this,"Registered Error" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this,"Registered Error : " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                     }
 
                 }

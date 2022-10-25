@@ -1,5 +1,6 @@
 package com.example.rabbitu;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rabbitu.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +31,7 @@ public class Login extends AppCompatActivity {
     EditText emailLogin ;
     EditText passwordLogin ;
     TextView registerNowTxt ;
+    TextView forgetTxt ;
     Button loginBtn ;
 
     FirebaseAuth mAuth;
@@ -59,51 +64,76 @@ public class Login extends AppCompatActivity {
         passwordLogin = findViewById(R.id.editTextPasswordLogin);
         registerNowTxt = findViewById(R.id.registerNow);
         loginBtn = findViewById(R.id.LoginButton);
+        forgetTxt = findViewById(R.id.forgetpass);
+
 
         mAuth = FirebaseAuth.getInstance();
+
 
         loginBtn.setOnClickListener(view->{
             loginUser();
         });
 
 
-
+        //Link & Open the register activity
         registerNowTxt.setOnClickListener(view->{
             startActivity(new Intent(Login.this,Register.class));
         });
 
 
 
+        //Reset Password through email (check on the spam email)
+        forgetTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                EditText resetMail = new EditText(v.getContext());
+                AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(v.getContext());
+                passwordResetDialog.setTitle("Reset password ? ");
+                passwordResetDialog.setMessage("Enter Your Email To Receive Reset Link. ");
+                passwordResetDialog.setView(resetMail);
 
-//        loginBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                final String emailTxt = email.getText().toString();
-//                final String passwordTxt = password.getText().toString();
-//
-//
-//                if (emailTxt.isEmpty() || passwordTxt.isEmpty()){
-//                    Toast.makeText(Login.this, "Please enter your email or password !", Toast.LENGTH_SHORT).show();
-//                }
-//                else{
-//                    Intent intent = new Intent(Login.this,MainActivity.class);
-//             startActivity(intent);
-//                }
-//
-//
-//            }
-//        });
+                passwordResetDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        //extract the email and send reset link
+                        String mail = resetMail.getText().toString();
+                        mAuth.sendPasswordResetEmail(mail).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(Login.this,"Reset Link Send To your Email",Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(Login.this,"Error ! Reset Link Cannot Send : " + e.getMessage(),Toast.LENGTH_SHORT).show();
 
+                            }
+                        });
+
+                    }
+                });
+
+                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    //Close the Dialog
+                    }
+                });
+
+                passwordResetDialog.create().show();
+
+            }
+        });
 
 
     }
 
+
+    //Validation on the Input Field
     private void loginUser(){
         String emailTxt = emailLogin.getText().toString();
         String passwordTxt = passwordLogin.getText().toString();
-
 
         if (TextUtils.isEmpty(emailTxt)){
             emailLogin.setError("Email cannot be empty");
@@ -121,7 +151,7 @@ public class Login extends AppCompatActivity {
                         startActivity(new Intent(Login.this,MainActivity.class));
                     }
                     else{
-                        Toast.makeText(Login.this,"Log In Error" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login.this,"Log In Error : " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }
             });
