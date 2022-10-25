@@ -20,9 +20,12 @@
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/drawable/rounded.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/drawable/text_input_shape.xml" value="0.38333333333333336" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_book.xml" value="0.25" />
+        <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_leaderboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_notes.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_register.xml" value="0.39094650205761317" />
+        <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_splashscreen.xml" value="0.1" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/fragment_book.xml" value="0.2140625" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/fragment_demo.xml" value="0.1762917933130699" />

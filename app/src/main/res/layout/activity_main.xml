@@ -7,11 +7,99 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:id="@+id/fragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <ScrollView
+        android:id="@+id/home_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:paddingTop="20dp">
+
+        <LinearLayout
+            android:id="@+id/timer_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <RelativeLayout
+                android:id="@+id/timer_relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded">
+
+                <RelativeLayout
+                    android:id="@+id/image_relative_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/back_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bgcircle"
+                        android:layout_centerInParent="true"/>
+
+                    <ImageView
+                        android:id="@+id/arrow_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icanchor"
+                        android:layout_centerInParent="true"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/details_linear_layout"
+                    android:layout_toRightOf="@id/image_relative_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical">
+
+                    <Chronometer
+                        android:id="@+id/timer_chronometer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="30dp"/>
+
+                    <Button
+                        android:id="@+id/button_start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Start"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"/>
+
+                    <Button
+                        android:id="@+id/button_stop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Stop"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"/>
+
+                    <Button
+                        android:id="@+id/button_reset"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Reset"
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/white"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_bar"
