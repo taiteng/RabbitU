@@ -139,6 +139,7 @@
                         android:textSize="17sp"
                         android:text="Already have an account?"
                         android:layout_marginTop="@dimen/loginViewsMargin"
+                        android:id="@+id/onLoginClick"
                         android:onClick="onLoginClick"/>
 
                 </LinearLayout>
