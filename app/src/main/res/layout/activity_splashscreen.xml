@@ -7,6 +7,7 @@
     tools:context=".SplashScreen">
 
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/rabbitu_gif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -14,6 +15,7 @@
         android:src="@drawable/rabbitu"/>
 
     <TextView
+        android:id="@+id/rabbitu_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
