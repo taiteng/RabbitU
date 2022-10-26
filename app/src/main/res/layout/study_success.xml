@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_border"
+    android:paddingTop="20dp"
+    android:paddingHorizontal="15dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/failedTimerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="@string/good_job_text"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"></TextView>
+
+    <RelativeLayout
+        android:id="@+id/GifHolder"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/failedTimerText"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal">
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/rabbitCelebrate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@drawable/rabbitu_dance"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/InfoHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/GifHolder"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/totalStudyMinutesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/study_duration_text"
+            android:textColor="@color/black"
+            android:textSize="20sp"></TextView>
+
+        <TextView
+            android:id="@+id/totalStudyMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/totalStudyMinutesText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black">
+            android:textSize="20sp"></TextView>
+
+        <TextView
+            android:id="@+id/totalPauseMinutesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/totalStudyMinutes"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/pause_duration_text"
+            android:textColor="@color/black">
+            android:textSize="20sp"></TextView>
+
+        <TextView
+            android:id="@+id/totalPauseMinutes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/totalPauseMinutesText"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"></TextView>
+
+        <RelativeLayout
+            android:id="@+id/bambooEarnedArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/totalPauseMinutes"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/totalCoinsEarnedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/total_earned_text"
+                android:textColor="@color/black"
+                android:textSize="20sp"></TextView>
+
+            <TextView
+                android:id="@+id/totalCoinsEarned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/totalCoinsEarnedText"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="20sp"></TextView>
+
+            <ImageView
+                android:id="@+id/coinsImage"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@+id/totalCoinsEarnedText"
+                android:layout_toRightOf="@+id/totalCoinsEarnedText"
+                android:src="@drawable/coin_icon"
+                tools:ignore="ImageContrastCheck"></ImageView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/buttonArea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/InfoHolder"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp">
+
+        <ImageButton
+            android:id="@+id/exitIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/exit_icon"
+            app:tint="@color/black"></ImageButton>
+
+        <TextView
+            android:id="@+id/exitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/exitIcon"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/exit_text"
+            android:textSize="15sp"
+            android:textColor="@color/black">
+        </TextView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
