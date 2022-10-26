@@ -44,11 +44,9 @@ public class Login extends AppCompatActivity {
     EditText passwordLogin ;
     TextView forgetTxt ;
     Button loginBtn ;
-    ImageView googleSignIn ;
-
+    ImageView googleSignIn;
     GoogleSignInOptions gso;
     GoogleSignInClient signInClient;
-
     FirebaseAuth mAuth;
 
     @Override
@@ -70,14 +68,11 @@ public class Login extends AppCompatActivity {
         forgetTxt = findViewById(R.id.forgetpass);
         googleSignIn = findViewById(R.id.google_login);
 
-
         mAuth = FirebaseAuth.getInstance();
-
 
         loginBtn.setOnClickListener(view->{
             loginUser();
         });
-
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                .requestIdToken("407560665615-4hie262til75rshdgsocquvrqrdnc67k.apps.googleusercontent.com")
@@ -86,15 +81,12 @@ public class Login extends AppCompatActivity {
 
         signInClient = GoogleSignIn.getClient(this,gso);
 
-
         googleSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SignIn();
             }
         });
-
-
 
         //Reset Password through email (check on the spam email)
         forgetTxt.setOnClickListener(new View.OnClickListener() {
@@ -168,9 +160,9 @@ public class Login extends AppCompatActivity {
     }
 
     //Google Sign In
-     void SignIn() {
+    void SignIn() {
         Intent intent = signInClient.getSignInIntent();
-        startActivityForResult(intent,1000);
+        startActivityForResult(intent, 1000);
     }
 
     //Google Log In
@@ -206,13 +198,11 @@ public class Login extends AppCompatActivity {
     }
 
     //After successfully Google Log In and then Link to the Home page
-     void HomeActivity() {
+    void HomeActivity() {
         finish();
         Intent intent = new Intent(Login.this,MainActivity.class);
         startActivity(intent);
     }
-
-
 
     //Link & open  to register activity
     public void onRegisterClick(View View){
@@ -220,6 +210,4 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
-
-
 }
