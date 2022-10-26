@@ -7,11 +7,21 @@ public class Book {
     private UUID mID;
     private String mTitle;
     private File file;
+    private int image;
 
-    public Book(String title,File file){
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public Book(String title, File file,int image){
         mID=UUID.randomUUID();
         mTitle=title;
         this.file=file;
+        this.image=image;
     }
 
     public UUID getID() {

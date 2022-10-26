@@ -19,8 +19,13 @@ public class BookLab {
     }
     private BookLab(Context context){
             mBooks=new ArrayList<>();
-            mBooks.add(new Book("Java Book",new File("android.resource://com.example.rabbitu/assets/Java Book.pdf")));
+            mBooks.add(new Book("Java Book",new File("android.resource://com.example.rabbitu/assets/Java Book.pdf"),R.drawable.book_icon));
     }
+
+    public List<Book> getBooks() {
+        return mBooks;
+    }
+
     public Book getBook(UUID id){
         for(Book book:mBooks){
             if (book.getID().equals(id)){

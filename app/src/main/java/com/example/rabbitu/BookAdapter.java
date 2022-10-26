@@ -2,38 +2,55 @@ package com.example.rabbitu;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.util.List;
+import java.util.ArrayList;
 
-public class BookAdapter extends RecyclerView.Adapter<BookViewHolder> {
-    private Context context;
-    private List<File> bookFiles;
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
+    private final Context context;
+    private final ArrayList<Book> mBooks;
 
-    public BookAdapter(Context context, List<File> pdfFiles) {
+    public BookAdapter(Context context, ArrayList<Book> books) {
         this.context = context;
-        this.bookFiles = pdfFiles;
+        this.mBooks = books;
     }
 
     @NonNull
     @Override
-    public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new BookViewHolder(LayoutInflater.from(context).inflate(R.layout.book_card,parent,false));
+    public BookAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater=LayoutInflater.from(context);
+        View view =layoutInflater.inflate(R.layout.book_card,parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
-        holder.textView.setText(bookFiles.get(position).getName());
-        holder.textView.setSelected(true);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Book book=mBooks.get(position);
+        holder.textView.setText(book.getTitle());
+        holder.imageView.setImageResource(book.getImage());
     }
 
     @Override
     public int getItemCount() {
-        return bookFiles.size();
+        return mBooks.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView textView;
+        private final ImageView imageView;
+
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            textView=itemView.findViewById(R.id.book_title);
+            imageView=itemView.findViewById(R.id.book_cover);
+        }
     }
 }
