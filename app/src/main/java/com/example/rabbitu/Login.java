@@ -191,7 +191,7 @@ public class Login extends AppCompatActivity {
                 signInTask.getResult(ApiException.class);
                 HomeActivity();
             } catch (ApiException e) {
-                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Something went wrong" + signInTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 
