@@ -27,7 +27,16 @@ public class BookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book);
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
-        mBottomNavigationView.setSelectedItemId(R.id.item4);
+        mBottomNavigationView.setSelectedItemId(R.id.item2);
+
+        recyclerView=findViewById(R.id.recycler_view);
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(new Book("Java", new File("./Java Book.pdf"), R.drawable.book_icon));
+        BookAdapter bookAdapter = new BookAdapter(this, books);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(bookAdapter);
 
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -59,14 +68,5 @@ public class BookActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        recyclerView=findViewById(R.id.recycler_view);
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("Java", new File("./Java Book.pdf"), R.drawable.book_icon));
-        BookAdapter bookAdapter = new BookAdapter(this, books);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(bookAdapter);
     }
 }

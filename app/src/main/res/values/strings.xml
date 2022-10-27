@@ -14,4 +14,7 @@
     <string name="redo_timer_text">Redo</string>
     <string name="home_text">Home</string>
     <string name="exit_text">Exit</string>
+    <string name="start_button">Start</string>
+    <string name="pause_button">Pause</string>
+    <string name="reset_button">Reset</string>
 </resources>

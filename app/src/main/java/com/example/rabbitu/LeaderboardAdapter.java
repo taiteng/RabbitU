@@ -23,6 +23,7 @@ public class LeaderboardAdapter extends BaseAdapter {
     ArrayList<String> minList = new ArrayList<>();
     boolean first = true;
     int rank = 0;
+    int count = 0;
 
     public LeaderboardAdapter(Leaderboard leaderboard, ArrayList<String> nameList , ArrayList<String> minList) {
         this.leaderboard = leaderboard;
@@ -48,7 +49,6 @@ public class LeaderboardAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(leaderboard).inflate(R.layout.leaderboard_item, parent, false);
-
 
         TextView itemName, itemMin, itemRank;
 
