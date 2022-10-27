@@ -49,6 +49,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
     implementation 'com.google.android.gms:play-services-auth:20.3.0'
+
+    implementation 'com.karumi:dexter:6.2.3'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+
 
 }

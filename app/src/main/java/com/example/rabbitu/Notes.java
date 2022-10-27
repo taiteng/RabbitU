@@ -26,20 +26,23 @@ public class Notes extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.item1:
-                        startActivity(new Intent(Notes.this,MainActivity.class));
+                        finish();
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item2:
-                        startActivity(new Intent(Notes.this,Book.class));
+                        finish();
+                        startActivity(new Intent(Notes.this,BookActivity.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item3:
+                        finish();
                         startActivity(new Intent(Notes.this,Leaderboard.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item4:
                         return true;
                     case R.id.item5:
+                        finish();
                         startActivity(new Intent(Notes.this,Settings.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;

@@ -32,6 +32,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 
+import java.io.File;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";
@@ -90,6 +93,15 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Unable to connected to database. Please try again. Error: " + error, Toast.LENGTH_LONG).show();
             }
         });
+
+
+        isPlayingMusic = true;
+        musicAudio = "https://firebasestorage.googleapis.com/v0/b/rabbitu-ae295.appspot.com/o/Eric%20Godlow%20Beats%20-%20follow%20me.mp3?alt=media&token=a5723865-1f95-4e46-818d-935192f427f0";
+
+
+
+
+
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item1);
