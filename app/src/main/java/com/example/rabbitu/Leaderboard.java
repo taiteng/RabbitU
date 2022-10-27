@@ -136,20 +136,23 @@ public class Leaderboard extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.item1:
-                        startActivity(new Intent(Leaderboard.this,MainActivity.class));
+                        finish();
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item2:
-                        startActivity(new Intent(Leaderboard.this,Book.class));
+                        finish();
+                        startActivity(new Intent(Leaderboard.this,BookActivity.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item3:
                         return true;
                     case R.id.item4:
+                        finish();
                         startActivity(new Intent(Leaderboard.this,Notes.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item5:
+                        finish();
                         startActivity(new Intent(Leaderboard.this,Settings.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;

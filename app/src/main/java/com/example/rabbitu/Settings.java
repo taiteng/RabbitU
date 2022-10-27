@@ -39,7 +39,6 @@ public class Settings extends AppCompatActivity {
         LogoutBtn = findViewById(R.id.btnLogout);
         mail = findViewById(R.id.userEmail);
 
-
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item5);
 
@@ -58,31 +57,32 @@ public class Settings extends AppCompatActivity {
             mail.setText(Mail);
         }
 
-
         LogoutBtn.setOnClickListener(view->{
             mAuth.signOut();
             signOut();
             startActivity(new Intent(Settings.this,Login.class));
         });
 
-
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.item1:
-                        startActivity(new Intent(Settings.this,MainActivity.class));
+                        finish();
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item2:
-                        startActivity(new Intent(Settings.this,Book.class));
+                        finish();
+                        startActivity(new Intent(Settings.this,BookActivity.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item3:
+                        finish();
                         startActivity(new Intent(Settings.this,Leaderboard.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item4:
+                        finish();
                         startActivity(new Intent(Settings.this,Notes.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;

@@ -20,6 +20,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -31,6 +33,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+
+import java.io.File;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -91,6 +96,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        isPlayingMusic = true;
+        musicAudio = "https://firebasestorage.googleapis.com/v0/b/rabbitu-ae295.appspot.com/o/Eric%20Godlow%20Beats%20-%20follow%20me.mp3?alt=media&token=a5723865-1f95-4e46-818d-935192f427f0";
+
+
+
+
+
+
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item1);
 
@@ -101,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item1:
                         return true;
                     case R.id.item2:
-                        startActivity(new Intent(MainActivity.this,Book.class));
+                        startActivity(new Intent(MainActivity.this,BookActivity.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item3:
