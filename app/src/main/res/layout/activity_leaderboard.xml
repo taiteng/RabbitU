@@ -6,10 +6,145 @@
     android:layout_height="match_parent"
     tools:context=".Leaderboard">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/layout_top_card"
+        android:background="@drawable/round_corner_card"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="270dp">
+
+        <TextView
+            android:id="@+id/title_leaderboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="sans-serif-black"
+            android:letterSpacing="0.03"
+            android:text="LEADERBOARD"
+            android:textColor="@color/dark_blue"
+            android:textSize="25dp" />
+
+        <RelativeLayout
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_leaderboard"
+            android:layout_alignBottom="@+id/title_leaderboard"
+            android:layout_alignParentBottom="true">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:id="@+id/first_leaderboard_item"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@color/white"
+                app:roundPercent="1"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/gold_medal_icon"/>
+
+            <TextView
+                android:id="@+id/first_leaderboard_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/first_leaderboard_item"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-35dp"
+                android:text="Lee"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/first_leaderboard_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/first_leaderboard_name"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-35dp"
+                android:text="600 min"
+                android:textSize="15dp" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:id="@+id/second_leaderboard_item"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                app:roundPercent="1"
+                android:layout_alignLeft="@+id/first_leaderboard_item"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/silver_medal_icon" />
+
+            <TextView
+                android:id="@+id/second_leaderboard_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/second_leaderboard_item"
+                android:layout_marginBottom="-35dp"
+                android:layout_marginLeft="27dp"
+                android:text="Tan"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/second_leaderboard_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/second_leaderboard_name"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="20dp"
+                android:text="300 min"
+                android:textSize="15dp" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                android:id="@+id/third_leaderboard_item"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                app:roundPercent="1"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/bronze_medal_icon" />
+
+            <TextView
+                android:id="@+id/third_leaderboard_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/third_leaderboard_item"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="27dp"
+                android:layout_marginBottom="-35dp"
+                android:text="Tan"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/third_leaderboard_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/third_leaderboard_name"
+                android:layout_marginTop="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:text="300 min"
+                android:textSize="15dp" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <ListView
+        android:id="@+id/list_leaderboard"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Leaderboard"/>
+        android:layout_above="@+id/bottom_navigation_bar"
+        android:layout_below="@id/layout_top_card"
+        android:listSelector="@drawable/list_selector"
+        android:padding="20dp">
+
+    </ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_bar"
