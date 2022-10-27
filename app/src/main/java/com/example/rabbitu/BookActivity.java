@@ -22,7 +22,7 @@ public class BookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book);
         recyclerView=findViewById(R.id.recycler_view);
         ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("Java", new File("./Java Book.pdf"), R.drawable.book_icon));
+        books.add(new Book("Java", "Java Book.pdf", R.drawable.book_icon));
         BookAdapter bookAdapter = new BookAdapter(this, books);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 

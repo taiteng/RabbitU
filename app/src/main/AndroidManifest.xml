@@ -3,6 +3,8 @@
     package="com.example.rabbitu">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,21 +14,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RabbitU">
         <activity
+            android:name=".OpenBook"
+            android:exported="false" />
+        <activity
             android:name=".Settings"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Leaderboard"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Notes"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
-            android:name=".Book"
-            android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:name=".BookActivity"
+            android:exported="false" />
         <activity
             android:name=".Login"
             android:exported="true"

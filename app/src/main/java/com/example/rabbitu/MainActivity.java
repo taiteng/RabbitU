@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item1:
                         return true;
                     case R.id.item2:
-                        startActivity(new Intent(MainActivity.this,Book.class));
+                        startActivity(new Intent(MainActivity.this,BookActivity.class));
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         return true;
                     case R.id.item3:

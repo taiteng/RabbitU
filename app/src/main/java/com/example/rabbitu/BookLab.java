@@ -19,7 +19,7 @@ public class BookLab {
     }
     private BookLab(Context context){
             mBooks=new ArrayList<>();
-            mBooks.add(new Book("Java Book",new File("android.resource://com.example.rabbitu/assets/Java Book.pdf"),R.drawable.book_icon));
+            mBooks.add(new Book("Java Book","Java Book.pdf",R.drawable.book_icon));
     }
 
     public List<Book> getBooks() {
