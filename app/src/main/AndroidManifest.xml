@@ -24,7 +24,7 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".Book"
+            android:name=".BookActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity

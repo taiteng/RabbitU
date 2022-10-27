@@ -131,9 +131,7 @@
 
         </RelativeLayout>
 
-
     </RelativeLayout>
-
 
     <ListView
         android:id="@+id/list_leaderboard"

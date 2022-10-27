@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean isOngoingTimer;
     private static boolean isLeavingApp = false;
     private static boolean isReset = true;
+    private static boolean isBack = false;
     public static long mlastStopTime = 0;
     public static Context currentContext;
     public static String userID = "";
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     Animation atg, btgone, btgtwo, btgthree, roundingalone;
     ImageView backImg, arrowImg;
     Chronometer timerChronometer;
-    Button startBtn, stopBtn, resetBtn;
+    Button startBtn, pauseBtn, resetBtn;
 
     private boolean isPlayingMusic = false;
     private String musicAudio = "";
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         currentContext = MainActivity.this;
+
+        mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
+        mBottomNavigationView.setSelectedItemId(R.id.item1);
 
         //default media volume
         mediaPlayer.setVolume(0, 0);
@@ -96,17 +100,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         isPlayingMusic = true;
         musicAudio = "https://firebasestorage.googleapis.com/v0/b/rabbitu-ae295.appspot.com/o/Eric%20Godlow%20Beats%20-%20follow%20me.mp3?alt=media&token=a5723865-1f95-4e46-818d-935192f427f0";
-
-
-
-
-
-
-        mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
-        mBottomNavigationView.setSelectedItemId(R.id.item1);
 
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -147,17 +142,17 @@ public class MainActivity extends AppCompatActivity {
         arrowImg = findViewById(R.id.arrow_image);
         timerChronometer = findViewById(R.id.timer_chronometer);
         startBtn = findViewById(R.id.button_start);
-        stopBtn = findViewById(R.id.button_stop);
+        pauseBtn = findViewById(R.id.button_pause);
         resetBtn = findViewById(R.id.button_reset);
 
         backImg.startAnimation(btgone);
         arrowImg.startAnimation(btgtwo);
         timerChronometer.startAnimation(atg);
         startBtn.startAnimation(btgone);
-        stopBtn.startAnimation(btgtwo);
+        pauseBtn.startAnimation(btgtwo);
         resetBtn.startAnimation(btgthree);
 
-        stopBtn.setAlpha(0);
+        pauseBtn.setAlpha(0);
         resetBtn.setAlpha(0);
 
         startBtn.setOnClickListener(new View.OnClickListener(){
@@ -167,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                 arrowImg.startAnimation(roundingalone);
 
                 //show and hide buttons
-                stopBtn.animate().alpha(1).setDuration(300).start();
+                pauseBtn.animate().alpha(1).setDuration(300).start();
                 startBtn.animate().alpha(0).setDuration(300).start();
 
                 if(resetBtn.getAlpha() == 1){
@@ -177,14 +172,13 @@ public class MainActivity extends AppCompatActivity {
                 //reset or resume
                 if(isReset){
                     timerChronometer.setBase(SystemClock.elapsedRealtime());
-                    timerChronometer.start();
                 }
                 else{
                     long intervalOnPause = (SystemClock.elapsedRealtime() - mlastStopTime);
                     timerChronometer.setBase(timerChronometer.getBase() + intervalOnPause);
-                    timerChronometer.start();
                     isReset = false;
                 }
+                timerChronometer.start();
 
                 try{
                     //Pass the audio URL to the Media Player
@@ -213,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        stopBtn.setOnClickListener(new View.OnClickListener(){
+        pauseBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 //stop animation
@@ -227,8 +221,9 @@ public class MainActivity extends AppCompatActivity {
 
                 //show and hide buttons
                 startBtn.animate().alpha(1).setDuration(300).start();
-                resetBtn.animate().alpha(1).translationY(-100).setDuration(300).start();
-                stopBtn.animate().alpha(0).setDuration(300).start();
+                startBtn.setText("Resume");
+                resetBtn.animate().alpha(1).setDuration(300).start();
+                pauseBtn.animate().alpha(0).setDuration(300).start();
 
                 //stop and reset media player
                 mediaPlayer.stop();
@@ -254,10 +249,11 @@ public class MainActivity extends AppCompatActivity {
 
                 //show and hide buttons
                 startBtn.animate().alpha(1).setDuration(300).start();
+                startBtn.setText("Start");
                 resetBtn.animate().alpha(0).setDuration(300).start();
 
-                if(stopBtn.getAlpha() == 1){
-                    stopBtn.animate().alpha(0).setDuration(300).start();
+                if(pauseBtn.getAlpha() == 1){
+                    pauseBtn.animate().alpha(0).setDuration(300).start();
                 }
 
                 //stop and reset media player
@@ -269,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
                 isReset = true;
 
                 //show dialog
-                succeededStudy();
+                //succeededStudy();
             }
         });
     }
@@ -302,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
     public void succeededStudy(){
         //Create the alert dialog box
         AlertDialog dialog;
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
         LayoutInflater inflater = this.getLayoutInflater();
         dialogBuilder.setView(inflater.inflate(R.layout.study_success, null));
         dialog = dialogBuilder.create();
@@ -330,5 +326,27 @@ public class MainActivity extends AppCompatActivity {
         exitButton.setOnClickListener(v -> {
             dialog.dismiss();
         });
+    }
+
+    /**
+     * Check if activity is destroyed
+     */
+    public boolean getActivityRunning(){
+        //this.getWindow().getDecorView().getRootView().isShown();
+        return this.isDestroyed();
+    }
+
+    /**
+     * Check if activity is MainActivity
+     */
+    public boolean checkMainActivity(){
+        return currentContext.equals(MainActivity.this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mBottomNavigationView.setSelectedItemId(R.id.item1);
     }
 }
