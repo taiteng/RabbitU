@@ -19,11 +19,10 @@ import java.util.List;
 public class LeaderboardAdapter extends BaseAdapter {
 
     Leaderboard leaderboard;
-    ArrayList<String> nameList = new ArrayList<>();
-    ArrayList<String> minList = new ArrayList<>();
+    ArrayList<String> nameList;
+    ArrayList<String> minList;
     boolean first = true;
     int rank = 0;
-    int count = 0;
 
     public LeaderboardAdapter(Leaderboard leaderboard, ArrayList<String> nameList , ArrayList<String> minList) {
         this.leaderboard = leaderboard;
@@ -50,6 +49,7 @@ public class LeaderboardAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         convertView = LayoutInflater.from(leaderboard).inflate(R.layout.leaderboard_item, parent, false);
 
+
         TextView itemName, itemMin, itemRank;
 
         //List view item initialization
@@ -57,18 +57,10 @@ public class LeaderboardAdapter extends BaseAdapter {
         itemMin = convertView.findViewById(R.id.leaderboard_item_min);
         itemRank = convertView.findViewById(R.id.leaderboard_item_rank);
 
-        itemName.setText(nameList.get(position));
-        itemMin.setText(minList.get(position));
+        itemName.setText(nameList.get(position)); //get Name
+        itemMin.setText(minList.get(position)); //get Minutes
+        itemRank.setText(String.valueOf(minList.indexOf(minList.get(position))+4)); //get Position number
 
-        if(first){
-            rank += 4;
-            first = false;
-        }else{
-            rank += 1;
-        }
-        System.out.println("current value"+rank);
-
-        itemRank.setText("#"+ String.valueOf(rank));
 
         return convertView;
     }
