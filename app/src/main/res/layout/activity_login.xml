@@ -91,7 +91,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/LoginButton"
                 style="@style/loginButton"
-                android:text="Login"
+                android:text="@string/login_button"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin" />
 
@@ -102,7 +102,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/themeColor"
                 android:textSize="17sp"
-                android:text="New user? Register Now"
+                android:text="@string/new_user_register_now"
                 android:layout_marginTop="@dimen/loginViewsMargin"
                 android:onClick="onRegisterClick"/>
 

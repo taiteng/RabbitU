@@ -11,19 +11,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_navigation_bar"
-        android:layout_alignEnd="@+id/btnLogout"
+        android:layout_alignEnd="@+id/button_layout"
         android:layout_marginEnd="17dp"
         android:layout_marginBottom="413dp"
         android:text="Mail"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/btnLogout"
+    <LinearLayout
+        android:id="@+id/button_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Logout"
-        android:textColor="@color/white"/>
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_button"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/button_music"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/music_button"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_bar"
