@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/leaderboard_item"
+    android:padding="10dp">
+
+    <!-- Leaderboard's item view for each row-->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:elevation="25dp"
+        app:cardMaxElevation="20dp"
+        android:id="@+id/layout_card_view">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:id="@+id/layout_relative_view">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/leaderboard_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ng E Soon"
+                android:textStyle="bold"
+                android:textColor="@color/dark_blue"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif"
+                />
+
+            <TextView
+                android:id="@+id/leaderboard_item_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 min"
+                android:textStyle="bold"
+                android:textColor="@color/dark_blue"
+                android:layout_marginTop="5dp"
+                android:layout_below="@id/leaderboard_item_name"
+                android:textSize="16dp"
+                android:fontFamily="sans-serif"
+                />
+
+            <TextView
+                android:id="@+id/leaderboard_item_rank"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#4"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/dark_blue"
+                android:textSize="20dp"
+                android:fontFamily="sans-serif"
+                />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

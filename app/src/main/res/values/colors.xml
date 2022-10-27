@@ -25,4 +25,9 @@
     <color name="primaryTextColor">#11CFC5</color>
     <color name="lightGrey">#DDDDDD</color>
     <color name="transparent">#00000000</color>
+
+    <color name="white_smoke">#EFEFEF</color>
+    <color name="grey">#D8D8D8</color>
+    <color name="dark_blue">#153462</color>
+
 </resources>
