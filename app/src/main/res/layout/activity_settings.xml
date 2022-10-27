@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Settings">
 
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_navigation_bar"
+        android:layout_alignEnd="@+id/btnLogout"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="413dp"
+        android:text="Mail"
+        android:textSize="30sp" />
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"

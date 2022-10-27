@@ -7,4 +7,11 @@
     <string name="menu_leaderboard">Leaderboard</string>
     <string name="menu_notes">Notes</string>
     <string name="menu_settings">Settings</string>
+    <string name="good_job_text">Good Job</string>
+    <string name="study_duration_text">Study Duration</string>
+    <string name="pause_duration_text">Pause Duration</string>
+    <string name="total_earned_text">Total Earned</string>
+    <string name="redo_timer_text">Redo</string>
+    <string name="home_text">Home</string>
+    <string name="exit_text">Exit</string>
 </resources>

@@ -5,16 +5,20 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public static long mlastStopTime = 0;
     public static Context currentContext;
     public static String userID = "";
+    public int secondsStudied = 0;
+    public int coinsEarned = 0;
 
     DatabaseReference mDatabaseReference;
     FirebaseAuth mAuth;
@@ -63,8 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
         currentContext = MainActivity.this;
 
+        //default media volume
         mediaPlayer.setVolume(0, 0);
 
+        //connect database and retrieve data
         mDatabaseReference = FirebaseDatabase.getInstance(firebaseURL).getReference().child("MusicStorage");
         mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 //Retrieve the number of coins (currency)
 
                 //Retrieve the audio URL
-                //musicAudio = snapshot.child("Lofi1").child("MusicAudio").getValue(String.class);
+                musicAudio = snapshot.child("Lofi1").child("MusicAudio").getValue(String.class);
 
                 //Set the text with the number of coins
 
@@ -88,8 +96,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         isPlayingMusic = true;
         musicAudio = "https://firebasestorage.googleapis.com/v0/b/rabbitu-ae295.appspot.com/o/Eric%20Godlow%20Beats%20-%20follow%20me.mp3?alt=media&token=a5723865-1f95-4e46-818d-935192f427f0";
+
+
 
 
 
@@ -125,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //animate layout
         atg = AnimationUtils.loadAnimation(MainActivity.this, R.anim.atg);
         btgone = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btgone);
         btgtwo = AnimationUtils.loadAnimation(MainActivity.this, R.anim.btgtwo);
@@ -151,8 +163,10 @@ public class MainActivity extends AppCompatActivity {
         startBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //start animation
                 arrowImg.startAnimation(roundingalone);
 
+                //show and hide buttons
                 stopBtn.animate().alpha(1).setDuration(300).start();
                 startBtn.animate().alpha(0).setDuration(300).start();
 
@@ -160,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     resetBtn.animate().alpha(0).setDuration(300).start();
                 }
 
+                //reset or resume
                 if(isReset){
                     timerChronometer.setBase(SystemClock.elapsedRealtime());
                     timerChronometer.start();
@@ -181,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
                         //Loop the audio
                         mp.setLooping(true);
 
+                        isPlayingMusic = true;
+
                         if (isPlayingMusic){
                             mp.setVolume(1,1);
                         }
@@ -199,22 +216,26 @@ public class MainActivity extends AppCompatActivity {
         stopBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //stop animation
                 arrowImg.clearAnimation();
 
+                //stop chronometer
                 timerChronometer.stop();
-                mlastStopTime = SystemClock.elapsedRealtime();
-                long elapsedMillis = SystemClock.elapsedRealtime() - timerChronometer.getBase();
-                double seconds = elapsedMillis/1000.00;
-                Toast.makeText(MainActivity.this, "Seconds: " + seconds, Toast.LENGTH_SHORT).show();
 
+                //keep pause seconds in check
+                mlastStopTime = SystemClock.elapsedRealtime();
+
+                //show and hide buttons
                 startBtn.animate().alpha(1).setDuration(300).start();
-                resetBtn.animate().alpha(1).setDuration(300).start();
+                resetBtn.animate().alpha(1).translationY(-100).setDuration(300).start();
                 stopBtn.animate().alpha(0).setDuration(300).start();
 
+                //stop and reset media player
                 mediaPlayer.stop();
                 mediaPlayer.release();
                 mediaPlayer = new MediaPlayer();
 
+                //not reset
                 isReset = false;
             }
         });
@@ -222,8 +243,16 @@ public class MainActivity extends AppCompatActivity {
         resetBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //calculate seconds
+                secondsStudied = calculateSeconds();
+
+                //count coins earned
+                coinsEarned = countCoins();
+
+                //reset chronometer
                 timerChronometer.setBase(SystemClock.elapsedRealtime());
 
+                //show and hide buttons
                 startBtn.animate().alpha(1).setDuration(300).start();
                 resetBtn.animate().alpha(0).setDuration(300).start();
 
@@ -231,12 +260,75 @@ public class MainActivity extends AppCompatActivity {
                     stopBtn.animate().alpha(0).setDuration(300).start();
                 }
 
+                //stop and reset media player
                 mediaPlayer.stop();
                 mediaPlayer.release();
                 mediaPlayer = new MediaPlayer();
 
+                //reset
                 isReset = true;
+
+                //show dialog
+                succeededStudy();
             }
+        });
+    }
+
+    /**
+     * Calculates the seconds studied by the user
+     */
+    public int calculateSeconds(){
+        mlastStopTime = SystemClock.elapsedRealtime();
+        long elapsedMillis = mlastStopTime - timerChronometer.getBase();
+        int seconds = (int)(elapsedMillis/1000.00);
+
+        return seconds;
+    }
+
+    /**
+     * Calculates the coins earned by the user
+     */
+    public int countCoins(){
+        long elapsedMillis = SystemClock.elapsedRealtime() - timerChronometer.getBase();
+        double seconds = elapsedMillis/1000.00;
+        int coins = (int)seconds/60;
+
+        return coins;
+    }
+
+    /**
+     * Shows a dialog box with details of the chronometer
+     */
+    public void succeededStudy(){
+        //Create the alert dialog box
+        AlertDialog dialog;
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialogBuilder.setView(inflater.inflate(R.layout.study_success, null));
+        dialog = dialogBuilder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+
+        //Display the alert dialog box
+        dialog.show();
+
+        //Initialization of the elements in timer_success.xml
+        TextView totalStudyMinutes = dialog.findViewById(R.id.totalStudyMinutes);
+        TextView totalPauseMinutes = dialog.findViewById(R.id.totalPauseMinutes);
+        TextView totalCoinsEarned = dialog.findViewById(R.id.totalCoinsEarned);
+        ImageButton exitButton = dialog.findViewById(R.id.exitIcon);
+
+        //Displays the timer details on the alert dialog box
+        totalStudyMinutes.setText(secondsStudied);
+        totalPauseMinutes.setText(secondsStudied);
+        totalCoinsEarned.setText(String.valueOf(coinsEarned));
+
+        //Insert database
+        mDatabaseReference.child("User").child("Coins").setValue(coinsEarned);
+
+        //Closes the alert dialog box
+        exitButton.setOnClickListener(v -> {
+            dialog.dismiss();
         });
     }
 }
