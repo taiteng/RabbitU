@@ -40,6 +40,10 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".OnBoarding"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">

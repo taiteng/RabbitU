@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -18,13 +19,25 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Settings extends AppCompatActivity {
+
+    private FirebaseUser user ;
+    private DatabaseReference reference ;
+
+    private String userID;
+
 
     BottomNavigationView mBottomNavigationView;
     FirebaseAuth mAuth;
     Button LogoutBtn, MusicBtn;
-    TextView mail;
+    TextView mail, name,phoneNumber,email;
 
     GoogleSignInOptions gso;
     GoogleSignInClient signInClient;
@@ -35,10 +48,19 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         mAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = user.getUid();
+
 
         LogoutBtn = findViewById(R.id.button_logout);
         MusicBtn = findViewById(R.id.button_music);
         mail = findViewById(R.id.userEmail);
+
+
+        name = findViewById(R.id.fullName);
+        phoneNumber = findViewById(R.id.phoneNumber);
+        email = findViewById(R.id.emailAddress);
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item5);
@@ -57,11 +79,45 @@ public class Settings extends AppCompatActivity {
             mail.setText(Mail);
         }
 
+
+
         LogoutBtn.setOnClickListener(view->{
             mAuth.signOut();
             signOut();
             startActivity(new Intent(Settings.this,Login.class));
         });
+
+
+
+        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile = snapshot.getValue(User.class);
+
+                if(userProfile != null){
+                    String fullNameTxt = userProfile.fullName;
+                    String emailTxt = userProfile.email;
+                    String phoneNumberTxt = userProfile.phoneNumber;
+
+                    name.setText(fullNameTxt);
+                    email.setText(emailTxt);
+                    phoneNumber.setText(phoneNumberTxt);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Settings.this,"Something went wrong" ,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
 
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
