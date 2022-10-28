@@ -23,7 +23,7 @@ public class Settings extends AppCompatActivity {
 
     BottomNavigationView mBottomNavigationView;
     FirebaseAuth mAuth;
-    Button LogoutBtn;
+    Button LogoutBtn, MusicBtn;
     TextView mail;
 
     GoogleSignInOptions gso;
@@ -36,12 +36,12 @@ public class Settings extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        LogoutBtn = findViewById(R.id.btnLogout);
+        LogoutBtn = findViewById(R.id.button_logout);
+        MusicBtn = findViewById(R.id.button_music);
         mail = findViewById(R.id.userEmail);
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item5);
-
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()

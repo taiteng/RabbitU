@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:id="@+id/layout_top_card"
-        android:background="@drawable/round_corner_card"
+        android:background="@drawable/light_blue_gradient"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_height="270dp">

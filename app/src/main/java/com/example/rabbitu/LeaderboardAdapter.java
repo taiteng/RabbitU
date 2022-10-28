@@ -19,8 +19,8 @@ import java.util.List;
 public class LeaderboardAdapter extends BaseAdapter {
 
     Leaderboard leaderboard;
-    ArrayList<String> nameList = new ArrayList<>();
-    ArrayList<String> minList = new ArrayList<>();
+    ArrayList<String> nameList;
+    ArrayList<String> minList;
     boolean first = true;
     int rank = 0;
 
@@ -57,18 +57,10 @@ public class LeaderboardAdapter extends BaseAdapter {
         itemMin = convertView.findViewById(R.id.leaderboard_item_min);
         itemRank = convertView.findViewById(R.id.leaderboard_item_rank);
 
-        itemName.setText(nameList.get(position));
-        itemMin.setText(minList.get(position));
+        itemName.setText(nameList.get(position)); //get Name
+        itemMin.setText(minList.get(position)); //get Minutes
+        itemRank.setText(String.valueOf(minList.indexOf(minList.get(position))+4)); //get Position number
 
-        if(first){
-            rank += 4;
-            first = false;
-        }else{
-            rank += 1;
-        }
-        System.out.println("current value"+rank);
-
-        itemRank.setText("#"+ String.valueOf(rank));
 
         return convertView;
     }

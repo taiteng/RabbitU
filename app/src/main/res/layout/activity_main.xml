@@ -73,15 +73,15 @@
                         android:id="@+id/button_start"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Start"
+                        android:text="@string/start_button"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"/>
 
                     <Button
-                        android:id="@+id/button_stop"
+                        android:id="@+id/button_pause"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Stop"
+                        android:text="@string/pause_button"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"/>
 
@@ -89,7 +89,7 @@
                         android:id="@+id/button_reset"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Reset"
+                        android:text="@string/reset_button"
                         android:textColor="@color/black"
                         android:backgroundTint="@color/white"/>
 
