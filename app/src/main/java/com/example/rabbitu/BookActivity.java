@@ -68,5 +68,14 @@ public class BookActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        recyclerView=findViewById(R.id.recycler_view);
+        ArrayList<Book> books = new ArrayList<>();
+        books.add(new Book("Java", "Java Book.pdf", R.drawable.book_icon));
+        BookAdapter bookAdapter = new BookAdapter(this, books);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(bookAdapter);
     }
 }
