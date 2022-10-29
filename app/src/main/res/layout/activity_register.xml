@@ -126,7 +126,7 @@
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/RegisterButton"
                         style="@style/loginButton"
-                        android:text="Register"
+                        android:text="@string/register_button"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/loginViewsMargin" />
 
@@ -137,7 +137,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/themeColor"
                         android:textSize="17sp"
-                        android:text="Already have an account?"
+                        android:text="@string/already_have_an_account"
                         android:layout_marginTop="@dimen/loginViewsMargin"
                         android:onClick="onLoginClick"/>
 

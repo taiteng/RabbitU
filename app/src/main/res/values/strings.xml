@@ -16,4 +16,13 @@
     <string name="redo_timer_text">Redo</string>
     <string name="home_text">Home</string>
     <string name="exit_text">Exit</string>
+    <string name="start_button">Start</string>
+    <string name="pause_button">Pause</string>
+    <string name="reset_button">Reset</string>
+    <string name="login_button">Login</string>
+    <string name="register_button">Register</string>
+    <string name="logout_button">Logout</string>
+    <string name="music_button">Mute</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="new_user_register_now">New user? Register Now</string>
 </resources>
