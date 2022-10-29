@@ -6,7 +6,7 @@ import java.util.UUID;
 public class Book {
     private UUID mID;
     private String mTitle;
-    private File file;
+    private String file;
     private int image;
 
     public int getImage() {
@@ -17,7 +17,7 @@ public class Book {
         this.image = image;
     }
 
-    public Book(String title, File file,int image){
+    public Book(String title, String file,int image){
         mID=UUID.randomUUID();
         mTitle=title;
         this.file=file;
@@ -33,7 +33,7 @@ public class Book {
     }
 
 
-    public File getFile() {
+    public String getFile() {
         return file;
     }
 
