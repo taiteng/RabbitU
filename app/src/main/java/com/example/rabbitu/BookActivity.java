@@ -29,15 +29,6 @@ public class BookActivity extends AppCompatActivity {
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item2);
 
-        recyclerView=findViewById(R.id.recycler_view);
-        ArrayList<Book> books = new ArrayList<>();
-        books.add(new Book("Java", new File("./Java Book.pdf"), R.drawable.book_icon));
-        BookAdapter bookAdapter = new BookAdapter(this, books);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(bookAdapter);
-
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
