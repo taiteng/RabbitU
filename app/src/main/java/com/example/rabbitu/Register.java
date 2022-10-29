@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class Register extends AppCompatActivity {
@@ -86,8 +87,24 @@ public class Register extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-                        Toast.makeText(Register.this,"User Registered successfully",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Register.this,Login.class));
+                        User user = new User (fullnameTxt, phoneTxt, emailTxt );
+
+                        FirebaseDatabase.getInstance().getReference("Users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(Register.this,"User Registered successfully",Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(Register.this,Login.class));
+                                        }else{
+                                            Toast.makeText(Register.this,"Fail to Register ! Try again ! ",Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+
                     }
                     else{
                         Toast.makeText(Register.this,"Registered Error : " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
