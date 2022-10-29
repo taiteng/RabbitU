@@ -7,7 +7,6 @@
     <string name="menu_leaderboard">Leaderboard</string>
     <string name="menu_notes">Notes</string>
     <string name="menu_settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="good_job_text">Good Job</string>
     <string name="study_duration_text">Study Duration</string>
@@ -22,26 +21,19 @@
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
     <string name="logout_button">Logout</string>
-    <string name="music_button">Mute</string>
+    <string name="music_button">Music</string>
+    <string name="mute_button">Mute</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="new_user_register_now">New user? Register Now</string>
-
-
-
-
 
     <!-- Headings -->
     <string name="heading_one">Quick &amp; Easy Reading </string>
     <string name="heading_two">Instant Notifications</string>
     <string name="heading_three">Take Note Anywhere</string>
 
-
-
     <!-- Description -->
     <string name="desc_one">Encourage users to study within that range of timer set.  </string>
     <string name="desc_two">When the timer goes on, an animated rabbit will be shown to motivate the user to study and not leave the session. </string>
     <string name="desc_three">Allow users to add, edit and delete notes.</string>
-
-
 
 </resources>
