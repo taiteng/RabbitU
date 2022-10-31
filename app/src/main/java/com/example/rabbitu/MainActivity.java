@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,16 +39,18 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";
-    private static final String TAG = "MainActivity";
-    private static boolean isOngoingTimer;
-    private static boolean isLeavingApp = false;
+    private FirebaseUser user ;
+    private DatabaseReference reference ;
+    private String userID = "";
     private static boolean isReset = true;
-    private static boolean isBack = false;
+    private String equippedMusicID = "";
     public static long mlastStopTime = 0;
     public static Context currentContext;
-    public static String userID = "";
     public int secondsStudied = 0;
     public int coinsEarned = 0;
+    private boolean isMuteMusic = false;
+    private String musicAudio = "";
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
     DatabaseReference mDatabaseReference;
     FirebaseAuth mAuth;
@@ -57,16 +60,17 @@ public class MainActivity extends AppCompatActivity {
     Chronometer timerChronometer;
     Button startBtn, pauseBtn, resetBtn;
 
-    private boolean isPlayingMusic = false;
-    private String musicAudio = "";
-    MediaPlayer mediaPlayer = new MediaPlayer();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         currentContext = MainActivity.this;
+
+        mAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+        reference = FirebaseDatabase.getInstance(firebaseURL).getReference().child("Users").child(userID);
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item1);
@@ -75,30 +79,18 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer.setVolume(0, 0);
 
         //connect database and retrieve data
-        mDatabaseReference = FirebaseDatabase.getInstance(firebaseURL).getReference().child("MusicStorage");
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                //Retrieve the image for the home page
-
-                //Retrieve the number of coins (currency)
-
-                //Retrieve the audio URL
-                musicAudio = snapshot.child("Lofi1").child("MusicAudio").getValue(String.class);
-
-                //Set the text with the number of coins
-
-                //Load the image for the home page
+                equippedMusicID = snapshot.child("equippedMusicID").getValue(String.class);
+                musicAudio = snapshot.child("equippedMusicAudio").getValue(String.class);
+                isMuteMusic = snapshot.child("isMuteMusic").getValue(boolean.class);
             }
-
-            //Display database error if any
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(MainActivity.this, "Unable to connected to database. Please try again. Error: " + error, Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,"Something went wrong" ,Toast.LENGTH_SHORT).show();
             }
         });
-
-        isPlayingMusic = true;
 
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -177,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 timerChronometer.start();
 
+                //start media player
                 try{
                     //Pass the audio URL to the Media Player
                     mediaPlayer.setDataSource(musicAudio);
@@ -187,14 +180,11 @@ public class MainActivity extends AppCompatActivity {
                         //Loop the audio
                         mp.setLooping(true);
 
-                        isPlayingMusic = true;
-
-                        if (isPlayingMusic){
-                            mp.setVolume(1,1);
-                        }
-
-                        else {
+                        if (isMuteMusic){
                             mp.setVolume(0,0);
+                        }
+                        else {
+                            mp.setVolume(1,1);
                         }
                     });
                     mediaPlayer.prepare();
@@ -326,20 +316,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Check if activity is destroyed
+     * Put the selection of menu on item1 on resume
      */
-    public boolean getActivityRunning(){
-        //this.getWindow().getDecorView().getRootView().isShown();
-        return this.isDestroyed();
-    }
-
-    /**
-     * Check if activity is MainActivity
-     */
-    public boolean checkMainActivity(){
-        return currentContext.equals(MainActivity.this);
-    }
-
     @Override
     protected void onResume() {
         super.onResume();

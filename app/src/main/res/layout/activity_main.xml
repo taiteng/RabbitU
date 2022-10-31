@@ -27,7 +27,7 @@
                 android:id="@+id/timer_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded">
+                android:background="@drawable/rounded_purple">
 
                 <RelativeLayout
                     android:id="@+id/image_relative_layout"
@@ -45,8 +45,8 @@
                         android:id="@+id/arrow_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icanchor"
-                        android:layout_centerInParent="true"/>
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icanchor" />
 
                 </RelativeLayout>
 
