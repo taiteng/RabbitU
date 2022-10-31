@@ -27,7 +27,7 @@ public class BookActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book);
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
-        mBottomNavigationView.setSelectedItemId(R.id.item4);
+        mBottomNavigationView.setSelectedItemId(R.id.item2);
 
         mBottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
