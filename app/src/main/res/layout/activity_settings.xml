@@ -107,14 +107,25 @@
             android:textColor="@color/black"
             android:background="@drawable/rounded_black_white"/>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_mute"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/mute_button"
-            android:textColor="@color/black"
-            android:background="@drawable/rounded_black_white"/>
+            android:background="@drawable/rounded_black_white">
+
+            <Switch
+                android:id="@+id/mute_switch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="@string/mute_button"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:textAllCaps="true"/>
+
+        </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_music"

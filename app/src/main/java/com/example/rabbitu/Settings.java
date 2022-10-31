@@ -14,8 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.GridView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,8 +52,9 @@ public class Settings extends AppCompatActivity {
 
     BottomNavigationView mBottomNavigationView;
     FirebaseAuth mAuth;
-    Button LogoutBtn, MuteBtn, MusicBtn;
+    Button LogoutBtn, MusicBtn;
     TextView mail, name,phoneNumber,email;
+    Switch MuteSwitch;
     GoogleSignInOptions gso;
     GoogleSignInClient signInClient;
 
@@ -66,7 +70,7 @@ public class Settings extends AppCompatActivity {
         userID = user.getUid();
 
         LogoutBtn = findViewById(R.id.button_logout);
-        MuteBtn = findViewById(R.id.button_mute);
+        MuteSwitch = findViewById(R.id.mute_switch);
         MusicBtn = findViewById(R.id.button_music);
         mail = findViewById(R.id.userEmail);
 
@@ -107,10 +111,10 @@ public class Settings extends AppCompatActivity {
 
                     isMuteMusic = snapshot.child("isMuteMusic").getValue(boolean.class);
                     if(isMuteMusic == true){
-                        MuteBtn.setText("Unmute");
+                        MuteSwitch.setChecked(true);
                     }
                     else{
-                        MuteBtn.setText("Mute");
+                        MuteSwitch.setChecked(false);
                     }
 
                     String fullNameTxt = userProfile.fullName;
@@ -169,10 +173,16 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        MuteBtn.setOnClickListener(new View.OnClickListener(){
+        MuteSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                boolean switchState = MuteSwitch.isChecked();
+                if(switchState == true){
+                    reference.child(userID).child("isMuteMusic").setValue(true);
+                }
+                else{
+                    reference.child(userID).child("isMuteMusic").setValue(false);
+                }
             }
         });
     }
@@ -250,16 +260,4 @@ public class Settings extends AppCompatActivity {
             dialog.dismiss();
         });
     }
-
-
-    //Check the user logout or not
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser user = mAuth.getCurrentUser();
-//        if(user == null){
-//            startActivity(new Intent(Setting.this,Login.class));
-//        }
-//    }
-
 }
