@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/settings_dialog_box"
+    android:padding="30dp">
+
+    <TextView
+        android:id="@+id/musicText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/music_text"
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"
+        android:textColor="@color/white">
+    </TextView>
+
+    <TextView
+        android:id="@+id/musicDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/musicText"
+        android:layout_marginTop="5dp"
+        android:text="@string/music_description"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:gravity="center">
+    </TextView>
+
+    <GridView
+        android:id="@+id/musicGridView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/musicDesc"
+        android:layout_marginTop="30dp"
+        android:verticalSpacing="20dp"
+        android:numColumns="1"
+        android:layout_centerHorizontal="true">
+    </GridView>
+
+</RelativeLayout>

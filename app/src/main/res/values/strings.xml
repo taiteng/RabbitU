@@ -21,10 +21,13 @@
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
     <string name="logout_button">Logout</string>
-    <string name="music_button">Music</string>
+    <string name="music_button">Choose Music</string>
     <string name="mute_button">Mute</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="new_user_register_now">New user? Register Now</string>
+    <string name="music_text">Music</string>
+    <string name="music_description">Series of mixes that loops for your study sessions</string>
+    <string name="music_equipped_text">(Equipped)</string>
 
     <!-- Headings -->
     <string name="heading_one">Quick &amp; Easy Reading </string>

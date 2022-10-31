@@ -98,26 +98,32 @@
         android:layout_above="@+id/bottom_navigation_bar"
         android:orientation="vertical">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_logout"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="@string/logout_button"
-            android:textColor="@color/white" />
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_black_white"/>
 
-        <Button
-            android:id="@+id/button_music"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="@string/music_button"
-            android:textColor="@color/white" />
-
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_mute"
-            android:layout_width="200dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:text="@string/mute_button"
-            android:textColor="@color/white" />
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_black_white"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/music_button"
+            android:textColor="@color/black"
+            android:background="@drawable/rounded_black_white"/>
 
     </LinearLayout>
 
