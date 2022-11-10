@@ -63,12 +63,12 @@
             android:id="@+id/phoneNumberTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"
             android:layout_below="@+id/fullName"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:text="Phone Number :"
-            android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/phoneNumber"
@@ -77,6 +77,26 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
             android:layout_below="@+id/phoneNumberTitle"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/coinsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phoneNumber"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:text="Coins :"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/coinsValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_below="@+id/coinsText"
             android:textSize="20sp" />
 
         <TextView

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -47,11 +48,19 @@ public class MainActivity extends AppCompatActivity {
     public static long mlastStopTime = 0;
     public static Context currentContext;
     public int secondsStudied = 0;
+    public int totalSecondsStudied = 0;
+    public int secondsPaused = 0;
+    public int millisPaused = 0;
+    public int coins = 0;
     public int coinsEarned = 0;
     private boolean isMuteMusic = false;
     private String musicAudio = "";
-    MediaPlayer mediaPlayer = new MediaPlayer();
+    private static  final long START_TIME_IN_MILLIS = 600000;
+    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private CountDownTimer mCountDownTimer;
+    private boolean mTimerRunning = false;
 
+    MediaPlayer mediaPlayer = new MediaPlayer();
     DatabaseReference mDatabaseReference;
     FirebaseAuth mAuth;
     BottomNavigationView mBottomNavigationView;
@@ -85,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 equippedMusicID = snapshot.child("equippedMusicID").getValue(String.class);
                 musicAudio = snapshot.child("equippedMusicAudio").getValue(String.class);
                 isMuteMusic = snapshot.child("isMuteMusic").getValue(boolean.class);
+                coins = snapshot.child("coins").getValue(int.class);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -161,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 //reset or resume
                 if(isReset){
                     timerChronometer.setBase(SystemClock.elapsedRealtime());
+                    endTimerPause();
                 }
                 else{
                     long intervalOnPause = (SystemClock.elapsedRealtime() - mlastStopTime);
@@ -206,6 +217,14 @@ public class MainActivity extends AppCompatActivity {
                 //keep pause seconds in check
                 mlastStopTime = SystemClock.elapsedRealtime();
 
+                //calculate seconds
+                secondsStudied = calculateSeconds();
+                totalSecondsStudied += secondsStudied;
+
+                //count coins earned
+                coinsEarned = countCoins();
+                coins += coinsEarned;
+
                 //show and hide buttons
                 startBtn.animate().alpha(1).setDuration(300).start();
                 startBtn.setText("Resume");
@@ -217,6 +236,8 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.release();
                 mediaPlayer = new MediaPlayer();
 
+                startTimerPause();
+
                 //not reset
                 isReset = false;
             }
@@ -225,12 +246,6 @@ public class MainActivity extends AppCompatActivity {
         resetBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                //calculate seconds
-                secondsStudied = calculateSeconds();
-
-                //count coins earned
-                coinsEarned = countCoins();
-
                 //reset chronometer
                 timerChronometer.setBase(SystemClock.elapsedRealtime());
 
@@ -248,11 +263,13 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.release();
                 mediaPlayer = new MediaPlayer();
 
+                endTimerPause();
+
                 //reset
                 isReset = true;
 
                 //show dialog
-                //succeededStudy();
+                succeededStudy(totalSecondsStudied, secondsPaused, coinsEarned);
             }
         });
     }
@@ -274,15 +291,16 @@ public class MainActivity extends AppCompatActivity {
     public int countCoins(){
         long elapsedMillis = SystemClock.elapsedRealtime() - timerChronometer.getBase();
         double seconds = elapsedMillis/1000.00;
-        int coins = (int)seconds/60;
+        //int coinsGet = (int)seconds/60;
+        int coinsGet = (int)seconds/1;
 
-        return coins;
+        return coinsGet;
     }
 
     /**
      * Shows a dialog box with details of the chronometer
      */
-    public void succeededStudy(){
+    public void succeededStudy(int second, int pause, int coin){
         //Create the alert dialog box
         AlertDialog dialog;
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
@@ -302,12 +320,70 @@ public class MainActivity extends AppCompatActivity {
         ImageButton exitButton = dialog.findViewById(R.id.exitIcon);
 
         //Displays the timer details on the alert dialog box
-        totalStudyMinutes.setText(secondsStudied);
-        totalPauseMinutes.setText(secondsStudied);
-        totalCoinsEarned.setText(String.valueOf(coinsEarned));
+        totalStudyMinutes.setText(String.valueOf(second));
+        totalPauseMinutes.setText(String.valueOf(pause));
+        totalCoinsEarned.setText(String.valueOf(coin));
 
-        //Insert database
-        mDatabaseReference.child("User").child("Coins").setValue(coinsEarned);
+        //Insert coins into database
+        reference.child("coins").setValue(coins);
+
+        //Closes the alert dialog box
+        exitButton.setOnClickListener(v -> {
+            dialog.dismiss();
+        });
+    }
+
+    //Start timer for pausing study session
+    private void startTimerPause(){
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                mTimeLeftInMillis = millisUntilFinished;
+            }
+
+            @Override
+            public void onFinish() {
+                //show dialog
+                failedStudy();
+            }
+        }.start();
+
+        mTimerRunning = true;
+    }
+
+    //End timer for pausing study session
+    private void endTimerPause(){
+        if(mTimerRunning){
+            mCountDownTimer.cancel();
+            mTimerRunning = false;
+            millisPaused = (int)START_TIME_IN_MILLIS - (int)mTimeLeftInMillis;
+            secondsPaused = millisPaused/1000;
+            mTimeLeftInMillis = START_TIME_IN_MILLIS;
+        }
+    }
+
+    /**
+     * Shows a dialog box with details of the chronometer
+     */
+    public void failedStudy(){
+        //Create the alert dialog box
+        AlertDialog dialog;
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        dialogBuilder.setView(inflater.inflate(R.layout.study_failed, null));
+        dialog = dialogBuilder.create();
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+
+        //Display the alert dialog box
+        dialog.show();
+
+        //Initialization of the elements in timer_failed.xml
+        TextView totalPauseMinutes = dialog.findViewById(R.id.totalPauseMinutes);
+        ImageButton exitButton = dialog.findViewById(R.id.exitIcon);
+
+        //Displays the failed details on the alert dialog box
+        totalPauseMinutes.setText(String.valueOf(10));
 
         //Closes the alert dialog box
         exitButton.setOnClickListener(v -> {
@@ -321,6 +397,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        //connect database and retrieve data
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                equippedMusicID = snapshot.child("equippedMusicID").getValue(String.class);
+                musicAudio = snapshot.child("equippedMusicAudio").getValue(String.class);
+                isMuteMusic = snapshot.child("isMuteMusic").getValue(boolean.class);
+                coins = snapshot.child("coins").getValue(int.class);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(MainActivity.this,"Something went wrong" ,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mBottomNavigationView.setSelectedItemId(R.id.item1);
     }
