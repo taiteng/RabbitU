@@ -10,12 +10,12 @@
     android:paddingBottom="20dp">
 
     <TextView
-        android:id="@+id/successedTimerText"
+        android:id="@+id/failedTimerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:text="@string/good_job_text"
+        android:text="@string/nice_try_text"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="40sp"></TextView>
@@ -24,7 +24,7 @@
         android:id="@+id/GifHolder"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/successedTimerText"
+        android:layout_below="@id/failedTimerText"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal">
 
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:src="@drawable/rabbitu_dance"/>
+            android:src="@drawable/rabbitu_na"/>
 
     </RelativeLayout>
 
@@ -45,29 +45,9 @@
         android:layout_centerHorizontal="true">
 
         <TextView
-            android:id="@+id/totalStudyMinutesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/study_duration_text"
-            android:textColor="@color/black"
-            android:textSize="15dp"></TextView>
-
-        <TextView
-            android:id="@+id/totalStudyMinutes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/totalStudyMinutesText"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
-
-        <TextView
             android:id="@+id/totalPauseMinutesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/totalStudyMinutes"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="@string/pause_duration_text"
@@ -84,45 +64,16 @@
             android:textColor="@color/black"
             android:textSize="15dp" />
 
-        <RelativeLayout
-            android:id="@+id/bambooEarnedArea"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/failedText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/totalPauseMinutes"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:id="@+id/totalCoinsEarnedText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/total_earned_text"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/totalCoinsEarned"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/totalCoinsEarnedText"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:text="0"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-
-            <ImageView
-                android:id="@+id/coinsImage"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@+id/totalCoinsEarnedText"
-                android:layout_toRightOf="@+id/totalCoinsEarnedText"
-                android:src="@drawable/coin_icon"
-                tools:ignore="ImageContrastCheck"></ImageView>
-
-        </RelativeLayout>
+            android:layout_below="@+id/totalPauseMinutes"
+            android:text="@string/failed_timer_text"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
     </RelativeLayout>
 
