@@ -48,12 +48,13 @@ public class Settings extends AppCompatActivity {
     private String userID;
     private ArrayList<Music> musicArrayList = new ArrayList<>();
     private String equippedMusicID = "";
+    private int coinsGet = 0;
     private boolean isMuteMusic = false;
 
     BottomNavigationView mBottomNavigationView;
     FirebaseAuth mAuth;
     Button LogoutBtn, MusicBtn;
-    TextView mail, name,phoneNumber,email;
+    TextView mail, name, phoneNumber, email, coins;
     Switch MuteSwitch;
     GoogleSignInOptions gso;
     GoogleSignInClient signInClient;
@@ -77,6 +78,7 @@ public class Settings extends AppCompatActivity {
         name = findViewById(R.id.fullName);
         phoneNumber = findViewById(R.id.phoneNumber);
         email = findViewById(R.id.emailAddress);
+        coins = findViewById(R.id.coinsValue);
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item5);
@@ -108,14 +110,17 @@ public class Settings extends AppCompatActivity {
 
                 if(userProfile != null){
                     equippedMusicID = snapshot.child("equippedMusicID").getValue(String.class);
-
                     isMuteMusic = snapshot.child("isMuteMusic").getValue(boolean.class);
+
                     if(isMuteMusic == true){
                         MuteSwitch.setChecked(true);
                     }
                     else{
                         MuteSwitch.setChecked(false);
                     }
+
+                    coinsGet = snapshot.child("coins").getValue(int.class);
+                    coins.setText(String.valueOf(coinsGet));
 
                     String fullNameTxt = userProfile.fullName;
                     String emailTxt = userProfile.email;
@@ -124,7 +129,6 @@ public class Settings extends AppCompatActivity {
                     name.setText(fullNameTxt);
                     email.setText(emailTxt);
                     phoneNumber.setText(phoneNumberTxt);
-
                 }
 
             }
@@ -226,9 +230,9 @@ public class Settings extends AppCompatActivity {
                 //Loop to retrieve all the data in Music_Storage
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     //Retrieve the data for each music
-                    String musicID = dataSnapshot.child("MusicID").getValue(String.class);
-                    String musicName = dataSnapshot.child("MusicName").getValue(String.class);
-                    String musicAudio = dataSnapshot.child("MusicAudio").getValue(String.class);
+                    String musicID = dataSnapshot.child("musicID").getValue(String.class);
+                    String musicName = dataSnapshot.child("musicName").getValue(String.class);
+                    String musicAudio = dataSnapshot.child("musicAudio").getValue(String.class);
 
                     //Insert the music data into a Music object
                     Music music = new Music(musicID, musicName, musicAudio);
