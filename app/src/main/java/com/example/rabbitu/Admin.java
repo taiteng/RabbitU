@@ -27,14 +27,14 @@ public class Admin extends AppCompatActivity {
         bookBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Admin.this,BookActivity.class));
+                startActivity(new Intent(Admin.this,AdminBook.class));
             }
         });
 
         musicBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Admin.this,BookActivity.class));
+                startActivity(new Intent(Admin.this,AdminMusic.class));
             }
         });
     }

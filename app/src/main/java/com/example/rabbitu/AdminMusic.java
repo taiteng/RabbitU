@@ -8,13 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -27,6 +31,8 @@ public class AdminMusic extends AppCompatActivity {
 
     final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";
 
+    RecyclerView  mRecyclerView;
+    AdminMusicAdapter mAdminMusicAdapter;
     ExtendedFloatingActionButton mFloatingActionButton;
 
     @Override
@@ -34,8 +40,18 @@ public class AdminMusic extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_music);
 
-        mFloatingActionButton = findViewById(R.id.add_music);
+        mRecyclerView = findViewById(R.id.rv);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        FirebaseRecyclerOptions<Music> options =
+                new FirebaseRecyclerOptions.Builder<Music>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("MusicStorage"), Music.class)
+                        .build();
+
+        mAdminMusicAdapter = new AdminMusicAdapter(options);
+        mRecyclerView.setAdapter(mAdminMusicAdapter);
+
+        mFloatingActionButton = findViewById(R.id.add_music);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,4 +130,21 @@ public class AdminMusic extends AppCompatActivity {
         });
     }
 
+    //Back button
+    public void onBackClick(View View){
+        Intent intent = new Intent(AdminMusic.this,Admin.class);
+        startActivity(intent);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAdminMusicAdapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mAdminMusicAdapter.stopListening();
+    }
 }
