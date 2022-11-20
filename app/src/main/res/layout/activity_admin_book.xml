@@ -5,4 +5,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".AdminBook">
 
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/bookName"
+    android:src="@drawable/book_icon"
+    android:layout_centerHorizontal="true"/>
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookName"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:hint="Enter the book's name"
+        />
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookAuthor"
+        android:layout_below="@+id/bookName"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:hint="Enter the book's author"
+        />
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bookCost"
+        android:layout_below="@+id/bookAuthor"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:hint="Enter the book's coin"
+        />
+
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/bookCost"
+    android:layout_centerHorizontal="true"
+    android:orientation="horizontal"
+    android:id="@+id/uploadFile"
+    >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bookName"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/uploadButton"
+        android:text="Upload file"
+        />
+    <ImageView
+        android:id="@+id/tickImage"
+        android:layout_marginLeft="10dp"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@+id/uploadButton"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/tick"/>
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/uploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploadFile"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bookName"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/uploadImageButton"
+            android:text="Upload image"
+            />
+        <ImageView
+            android:id="@+id/tickImage2"
+            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_toRightOf="@+id/uploadImageButton"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/tick"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/uploadImage"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="upload"
+        android:id="@+id/upload"/>
+
 </RelativeLayout>
