@@ -57,6 +57,14 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".AdminAddMusic"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AdminEditMusic"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".AdminBook"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />

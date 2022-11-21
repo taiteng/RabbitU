@@ -20,7 +20,11 @@
     <string name="crud_book">CRUD Book</string>
     <string name="crud_music">CRUD Music</string>
     <string name="add_music">Add Music</string>
+    <string name="edit_music">Edit Music</string>
+    <string name="upload_button">Upload</string>
     <string name="submit_button">Submit</string>
+    <string name="edit_button">Edit</string>
+    <string name="delete_button">Delete</string>
     <string name="start_button">Start</string>
     <string name="pause_button">Pause</string>
     <string name="reset_button">Reset</string>
