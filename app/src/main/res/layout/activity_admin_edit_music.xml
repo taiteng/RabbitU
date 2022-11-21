@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_border"
-    android:paddingTop="20dp"
-    android:paddingHorizontal="15dp"
-    android:paddingBottom="20dp">
+    tools:context=".AdminEditMusic">
 
     <TextView
-        android:id="@+id/addMusicText"
+        android:id="@+id/editMusicText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
-        android:text="@string/add_music"
+        android:layout_marginTop="10dp"
+        android:text="@string/edit_music"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="40sp"></TextView>
@@ -23,7 +23,8 @@
         android:id="@+id/form_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addMusicText"
+        android:layout_below="@+id/editMusicText"
+        android:layout_margin="10dp"
         app:cardBackgroundColor="@color/whiteTextColor"
         app:cardCornerRadius="10dp">
 
@@ -62,6 +63,32 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/loginViewsMargin"
+                android:id="@+id/uploadLayout">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/uploadButton"
+                    android:text="Upload MP3"
+                    android:textColor="@color/black"/>
+
+                <ImageView
+                    android:id="@+id/checkedImage"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/uploadButton"
+                    android:src="@drawable/checked" />
+
+            </RelativeLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputAudio"
                 style="@style/parent"
@@ -71,6 +98,7 @@
                     android:id="@+id/editMusicAudio"
                     style="@style/modifiedEditText"
                     android:background="@drawable/text_input_shape"
+                    android:enabled="false"
                     android:hint="Audio Link"/>
 
             </com.google.android.material.textfield.TextInputLayout>

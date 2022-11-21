@@ -19,7 +19,6 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:src="@drawable/music"
-            android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
 
         <TextView
@@ -57,6 +56,48 @@
             android:layout_below="@+id/txt_name"
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_audio"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="0dp"/>
+
+            <Button
+                android:id="@+id/editButton"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:backgroundTint="@color/dark_blue"
+                android:text="@string/edit_button"
+                android:textColor="@color/white"
+                android:textAllCaps="false"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="0dp"/>
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:backgroundTint="@color/dark_blue"
+                android:text="@string/delete_button"
+                android:textColor="@color/white"
+                android:textAllCaps="false"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="0dp"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
