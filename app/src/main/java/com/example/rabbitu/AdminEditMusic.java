@@ -147,10 +147,12 @@ public class AdminEditMusic extends AppCompatActivity {
         progressDialog.setTitle("Updating...");
         progressDialog.show();
 
+        //Delete previous child data first
         FirebaseDatabase.getInstance().getReference().child("MusicStorage").child(preMusicID).removeValue();
 
         StorageReference reference = storageReference.child(filename + ".mp3");
 
+        //Then upload
         reference.putFile(filepath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -190,10 +192,12 @@ public class AdminEditMusic extends AppCompatActivity {
         progressDialog.setTitle("Updating...");
         progressDialog.show();
 
+        //Delete previous child data first
         FirebaseDatabase.getInstance().getReference().child("MusicStorage").child(preMusicID).removeValue();
 
         Music music = new Music(music_id, music_name, music_audio);
 
+        //Then upload
         FirebaseDatabase.getInstance().getReference("MusicStorage")
                 .child(music_id).setValue(music).addOnCompleteListener(new OnCompleteListener<Void>() {
 
