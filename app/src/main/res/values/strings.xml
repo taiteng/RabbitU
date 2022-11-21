@@ -22,6 +22,7 @@
     <string name="add_music">Add Music</string>
     <string name="edit_music">Edit Music</string>
     <string name="upload_button">Upload</string>
+    <string name="update_button">Update</string>
     <string name="submit_button">Submit</string>
     <string name="edit_button">Edit</string>
     <string name="delete_button">Delete</string>

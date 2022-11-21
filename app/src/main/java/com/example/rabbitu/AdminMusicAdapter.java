@@ -2,7 +2,9 @@ package com.example.rabbitu;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +31,26 @@ public class AdminMusicAdapter extends FirebaseRecyclerAdapter<Music, AdminMusic
         super(options);
     }
 
+    private Context mContext;
+
     @Override
     protected void onBindViewHolder(@NonNull myViewHolder holder, @SuppressLint("RecyclerView") final int position, @NonNull Music model) {
         holder.mID.setText(model.getMusicID());
         holder.mName.setText(model.getMusicName());
         holder.mAudio.setText(model.getMusicAudio());
+
+        holder.editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext = holder.editBtn.getContext();
+
+                final Intent intent = new Intent(mContext, AdminEditMusic.class);
+                intent.putExtra("musicID", model.getMusicID());
+                intent.putExtra("musicName", model.getMusicName());
+                intent.putExtra("musicAudio", model.getMusicAudio());
+                mContext.startActivity(intent);
+            }
+        });
 
         holder.deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
