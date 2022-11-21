@@ -7,11 +7,14 @@
     tools:context=".Leaderboard">
 
     <RelativeLayout
+        android:elevation="25dp"
+        android:outlineAmbientShadowColor="@color/teal_200"
+        android:outlineSpotShadowColor="@color/teal_200"
         android:id="@+id/layout_top_card"
-        android:background="@drawable/light_blue_gradient"
+        android:background="@drawable/top_round_image"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_height="270dp">
+        android:layout_height="300dp">
 
         <TextView
             android:id="@+id/title_leaderboard"
@@ -23,9 +26,9 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="sans-serif-black"
             android:letterSpacing="0.03"
-            android:text="LEADERBOARD"
+            android:text="@string/leaderboard_page_title"
             android:textColor="@color/dark_blue"
-            android:textSize="25dp" />
+            android:textSize="18dp" />
 
         <RelativeLayout
             android:padding="20dp"
@@ -35,99 +38,159 @@
             android:layout_alignBottom="@+id/title_leaderboard"
             android:layout_alignParentBottom="true">
 
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:id="@+id/first_leaderboard_item"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@color/white"
-                app:roundPercent="1"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/gold_medal_icon"/>
-
-            <TextView
-                android:id="@+id/first_leaderboard_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/first_leaderboard_item"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-35dp"
-                android:text="Lee"
-                android:textSize="20dp" />
+                android:gravity="center_vertical"
+                android:weightSum="3">
 
-            <TextView
-                android:id="@+id/first_leaderboard_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/first_leaderboard_name"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="-35dp"
-                android:text="600 min"
-                android:textSize="15dp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="20dp"
-                android:id="@+id/second_leaderboard_item"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                app:roundPercent="1"
-                android:layout_alignLeft="@+id/first_leaderboard_item"
-                android:layout_alignParentLeft="true"
-                android:src="@drawable/silver_medal_icon" />
+                    <androidx.constraintlayout.utils.widget.ImageFilterView
+                        android:id="@+id/second_leaderboard_item"
+                        android:layout_width="50dp"
+                        android:outlineAmbientShadowColor="#DDDDDD"
+                        android:outlineSpotShadowColor="#DDDDDD"
+                        android:elevation="2dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/shape_top"
+                        app:roundPercent="1"
+                        android:layout_marginBottom="15dp"
+                        android:src="@drawable/silver_medal_icon" />
 
-            <TextView
-                android:id="@+id/second_leaderboard_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/second_leaderboard_item"
-                android:layout_marginBottom="-35dp"
-                android:layout_marginLeft="27dp"
-                android:text="Tan"
-                android:textSize="20dp" />
+                    <TextView
+                        android:id="@+id/second_leaderboard_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="William"
+                        android:textSize="17dp" />
 
-            <TextView
-                android:id="@+id/second_leaderboard_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/second_leaderboard_name"
-                android:layout_marginTop="40dp"
-                android:layout_marginLeft="20dp"
-                android:text="300 min"
-                android:textSize="15dp" />
+                    <TextView
+                        android:id="@+id/second_leaderboard_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:textColor="@color/white_smoke"
+                        android:layout_below="@+id/second_leaderboard_name"
+                        android:text="300 min"
+                        android:textSize="20dp" />
 
-            <androidx.constraintlayout.utils.widget.ImageFilterView
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="20dp"
-                android:id="@+id/third_leaderboard_item"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@color/white"
-                app:roundPercent="1"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/bronze_medal_icon" />
 
-            <TextView
-                android:id="@+id/third_leaderboard_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/third_leaderboard_item"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="27dp"
-                android:layout_marginBottom="-35dp"
-                android:text="Tan"
-                android:textSize="20dp" />
 
-            <TextView
-                android:id="@+id/third_leaderboard_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/third_leaderboard_name"
-                android:layout_marginTop="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="20dp"
-                android:text="300 min"
-                android:textSize="15dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_gravity="top">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal">
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/first_crown_item"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:elevation="45dp"
+                            android:outlineAmbientShadowColor="#FFD400"
+                            android:outlineSpotShadowColor="#FFD400"
+                            android:src="@drawable/crown_icon"
+                            app:roundPercent="1"
+                            app:imageRotate="-20"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignTop="@id/first_leaderboard_item"/>
+
+                        <androidx.constraintlayout.utils.widget.ImageFilterView
+                            android:id="@+id/first_leaderboard_item"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:elevation="15dp"
+                            android:background="@drawable/shape_top"
+                            app:roundPercent="1"
+                            android:outlineAmbientShadowColor="#FFD400"
+                            android:outlineSpotShadowColor="#FFD400"
+                            android:layout_marginBottom="15dp"
+                            android:src="@drawable/face_icon"/>
+
+
+
+                    </RelativeLayout>
+
+
+
+
+                    <TextView
+                        android:id="@+id/first_leaderboard_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/first_leaderboard_item"
+                        android:text="John"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:id="@+id/first_leaderboard_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white_smoke"
+                        android:fontFamily="sans-serif-black"
+                        android:layout_alignBottom="@+id/first_leaderboard_name"
+                        android:text="600 min"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <androidx.constraintlayout.utils.widget.ImageFilterView
+                        android:id="@+id/third_leaderboard_item"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentRight="true"
+                        android:outlineAmbientShadowColor="#AC7969"
+                        android:outlineSpotShadowColor="#AC7969"
+                        android:layout_marginBottom="15dp"
+                        android:background="@color/white"
+                        android:elevation="15dp"
+                        android:src="@drawable/bronze_medal_icon"
+                        app:roundPercent="1" />
+
+                    <TextView
+                        android:id="@+id/third_leaderboard_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/third_leaderboard_item"
+                        android:text="Charles"
+                        android:textSize="17dp" />
+
+                    <TextView
+                        android:id="@+id/third_leaderboard_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/third_leaderboard_name"
+                        android:text="300 min"
+                        android:textColor="@color/white_smoke"
+                        android:fontFamily="sans-serif-black"
+                        android:textSize="20dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </RelativeLayout>
 
@@ -136,14 +199,15 @@
 
 
     <ListView
+        android:elevation="35dp"
+        android:layout_marginTop="-35dp"
         android:id="@+id/list_leaderboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottom_navigation_bar"
         android:layout_below="@id/layout_top_card"
-        android:listSelector="@drawable/list_selector"
-        android:padding="20dp">
-
+        android:divider="@null"
+        android:dividerHeight="0dp">
     </ListView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
