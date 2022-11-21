@@ -45,7 +45,6 @@ public class Leaderboard extends AppCompatActivity {
     DatabaseReference df;
     Animation animation;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
