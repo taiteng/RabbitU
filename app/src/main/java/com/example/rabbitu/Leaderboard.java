@@ -44,7 +44,6 @@ public class Leaderboard extends AppCompatActivity {
     ArrayList<String> topCoinList = new ArrayList<>();
     DatabaseReference df;
     Animation animation;
-    int count = 0;
 
 
     @Override
@@ -69,6 +68,43 @@ public class Leaderboard extends AppCompatActivity {
 
         df = FirebaseDatabase.getInstance().getReference().child("Users");
         Query orderQuery = df.orderByChild("coins");
+
+        orderQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String nameValue = snapshot.child("fullName").getValue().toString();
+                String coinsValue = snapshot.child("coins").getValue().toString();
+
+                nameList.add(nameValue);
+                coinList.add(coinsValue);
+
+                Comparator c = Collections.reverseOrder();
+                Collections.sort(nameList,c);
+                Collections.sort(coinList,c);
+
+                leaderboardAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                leaderboardAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         //Check for once complete loading the data
         orderQuery.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -109,45 +145,6 @@ public class Leaderboard extends AppCompatActivity {
 
             }
         });
-
-        orderQuery.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                count++;
-                String nameValue = snapshot.child("fullName").getValue().toString();
-                String coinsValue = snapshot.child("coins").getValue().toString();
-
-                nameList.add(nameValue);
-                coinList.add(coinsValue);
-
-                Comparator c = Collections.reverseOrder();
-                Collections.sort(nameList,c);
-                Collections.sort(coinList,c);
-
-                leaderboardAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                leaderboardAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
         leaderboardListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
