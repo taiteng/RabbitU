@@ -104,9 +104,9 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/submitButton"
+                android:id="@+id/updateButton"
                 style="@style/themeButton"
-                android:text="@string/submit_button"
+                android:text="@string/update_button"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/loginViewsMargin" />
 
