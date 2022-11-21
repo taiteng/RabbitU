@@ -38,6 +38,7 @@
     <string name="music_text">Music</string>
     <string name="music_description">Series of mixes that loops for your study sessions</string>
     <string name="music_equipped_text">(Equipped)</string>
+    <string name="leaderboard_page_title">LEADERBOARD</string>
 
     <!-- Headings -->
     <string name="heading_one">Quick &amp; Easy Reading </string>
