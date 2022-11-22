@@ -35,6 +35,7 @@ import java.util.Comparator;
 public class Leaderboard extends AppCompatActivity {
 
     BottomNavigationView mBottomNavigationView;
+    int firstPosition = 0;
     ListView leaderboardListView;
     TextView lName1,lName2, lName3; //Top 3 Name variable
     TextView lText1, lText2, lText3; //Top 3 minutes spent
@@ -77,10 +78,10 @@ public class Leaderboard extends AppCompatActivity {
                 nameList.add(nameValue);
                 coinList.add(coinsValue);
 
-                Comparator c = Collections.reverseOrder();
-                Collections.sort(nameList,c);
-                Collections.sort(coinList,c);
 
+
+                System.out.println(nameValue);
+                System.out.println(coinsValue);
                 leaderboardAdapter.notifyDataSetChanged();
             }
 
@@ -110,14 +111,15 @@ public class Leaderboard extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 System.out.println("We're done loading the initial "+dataSnapshot.getChildrenCount()+" items");
 
-                //Add the names and the coins to the top list
-                topNameList.add(nameList.get(0));
-                topNameList.add(nameList.get(1));
-                topNameList.add(nameList.get(2));
+                //Reverse the list so we can get highest to lowest value
+                Collections.reverse(nameList);
+                Collections.reverse(coinList);
 
-                topCoinList.add(coinList.get(0));
-                topCoinList.add(coinList.get(1));
-                topCoinList.add(coinList.get(2));
+                //Add the names and the coins to the top list
+                for(int i=0; i<3; i++){
+                    topNameList.add(nameList.get(i));
+                    topCoinList.add(coinList.get(i));
+                }
 
                 //Set the value to the top three
                 lName1.setText(topNameList.get(0));
@@ -129,12 +131,10 @@ public class Leaderboard extends AppCompatActivity {
 
                 //Remove the top 3 from the original list
                 //since we have added to the top list
-                nameList.remove(0);
-                nameList.remove(0);
-                nameList.remove(0);
-                coinList.remove(0);
-                coinList.remove(0);
-                coinList.remove(0);
+                for(int i=0; i<3; i++){
+                    nameList.remove(firstPosition);
+                    coinList.remove(firstPosition);
+                }
 
                 leaderboardAdapter.notifyDataSetChanged();
             }
@@ -187,5 +187,7 @@ public class Leaderboard extends AppCompatActivity {
                 return false;
             }
         });
+
+
     }
 }

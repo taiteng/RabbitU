@@ -64,7 +64,9 @@ public class LeaderboardAdapter extends BaseAdapter {
 
         itemName.setText(nameList.get(position)); //get Name
         itemMin.setText(coinList.get(position)); //get Minutes
-        itemRank.setText("#"+String.valueOf(nameList.indexOf(nameList.get(position))+4)); //get Position number
+
+        System.out.println("#"+String.valueOf(getItemId(position)+4));
+        itemRank.setText("#"+String.valueOf(getItemId(position)+4)); //get Position number
         animation = AnimationUtils.loadAnimation(leaderboard, R.anim.leaderboard_list_scroll);
         convertView.setAnimation(animation);
 
