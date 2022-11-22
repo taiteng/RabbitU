@@ -3,11 +3,12 @@ package com.example.rabbitu;
 import android.net.Uri;
 
 public class PdfClass {
-    public String name,url,imageUrl,author, coin;
+    public String name,url,imageUrl,author;
+    int coin;
 
     public PdfClass(){}
 
-    public PdfClass(String name, String url, String imageUrl, String author, String coin) {
+    public PdfClass(String name, String url, String imageUrl, String author, int coin) {
         this.name = name;
         this.url = url;
         this.imageUrl = imageUrl;
@@ -23,11 +24,11 @@ public class PdfClass {
         this.author = author;
     }
 
-    public String getCoin() {
+    public int getCoin() {
         return coin;
     }
 
-    public void setCoin(String coin) {
+    public void setCoin(int coin) {
         this.coin = coin;
     }
 

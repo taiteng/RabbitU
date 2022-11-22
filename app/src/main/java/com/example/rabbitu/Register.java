@@ -23,6 +23,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Register extends AppCompatActivity {
 
@@ -90,7 +93,10 @@ public class Register extends AppCompatActivity {
                         String equippedMusicID = "Lofi1";
                         String equippedMusicAudio = "https://firebasestorage.googleapis.com/v0/b/rabbitu-ae295.appspot.com/o/Eric%20Godlow%20Beats%20-%20follow%20me.mp3?alt=media&token=a5723865-1f95-4e46-818d-935192f427f0";
                         int coins = 0;
-                        User user = new User (fullnameTxt, phoneTxt, emailTxt, equippedMusicID, equippedMusicAudio, coins, false);
+                        List<String> bookList=new ArrayList<>();
+                        bookList.add("Computer Science");
+                        bookList.add("Computer System");
+                        User user = new User (fullnameTxt, phoneTxt, emailTxt, equippedMusicID, equippedMusicAudio, coins, false,bookList);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -107,6 +113,7 @@ public class Register extends AppCompatActivity {
                                         }
                                     }
                                 });
+
 
                     }
                     else{

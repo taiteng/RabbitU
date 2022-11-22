@@ -137,7 +137,7 @@ public class AdminBook extends AppCompatActivity {
                 while (!uriTask.isComplete());
                 Uri uri=uriTask.getResult();
                 //getImage();
-                PdfClass pdfClass=new PdfClass(editText.getText().toString(),uri.toString(),book.toString(),authorText.getText().toString(),coinText.getText().toString());
+                PdfClass pdfClass=new PdfClass(editText.getText().toString(),uri.toString(),book.toString(),authorText.getText().toString(),Integer.valueOf(coinText.getText().toString()));
                 databaseReference.child(databaseReference.push().getKey()).setValue(pdfClass);
                 Toast.makeText(AdminBook.this,"File uploaded",Toast.LENGTH_LONG).show();
 
