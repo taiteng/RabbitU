@@ -45,8 +45,10 @@
                 android:weightSum="3">
 
                 <LinearLayout
+                    android:layout_marginTop="15dp"
+                    android:padding="15dp"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center">
@@ -87,7 +89,8 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center_horizontal"
@@ -151,9 +154,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="15dp"
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:padding="15dp"
                     android:orientation="vertical"
                     android:gravity="center">
 
@@ -176,6 +181,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignBottom="@+id/third_leaderboard_item"
                         android:text="Charles"
+                        android:textAlignment="center"
                         android:textSize="17dp" />
 
                     <TextView
