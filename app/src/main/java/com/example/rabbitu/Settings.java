@@ -21,6 +21,12 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -38,10 +44,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class Settings extends AppCompatActivity {
 
+    private FirebaseAuth.AuthStateListener authStateListener;
     final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";
     private FirebaseUser user ;
     private DatabaseReference reference, musicReference ;
@@ -51,6 +61,7 @@ public class Settings extends AppCompatActivity {
     private int coinsGet = 0;
     private boolean isMuteMusic = false;
     private boolean isActive = false;
+    private AccessTokenTracker accessTokenTracker;
 
     BottomNavigationView mBottomNavigationView;
     FirebaseAuth mAuth;
@@ -76,6 +87,7 @@ public class Settings extends AppCompatActivity {
         MusicBtn = findViewById(R.id.button_music);
         mail = findViewById(R.id.userEmail);
 
+
         name = findViewById(R.id.fullName);
         phoneNumber = findViewById(R.id.phoneNumber);
         email = findViewById(R.id.emailAddress);
@@ -83,6 +95,23 @@ public class Settings extends AppCompatActivity {
 
         mBottomNavigationView = findViewById(R.id.bottom_navigation_bar);
         mBottomNavigationView.setSelectedItemId(R.id.item5);
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+
+        GraphRequest request = GraphRequest.newMeRequest(
+                accessToken,
+                new GraphRequest.GraphJSONObjectCallback(){
+            @Override
+            public void onCompleted(@Nullable JSONObject jsonObject, @Nullable GraphResponse graphResponse) {
+                try {
+                    String fullName = jsonObject.getString("name");
+                    String email = jsonObject.getString("email");
+                    name.setText(fullName);
+                    mail.setText(email);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -101,7 +130,9 @@ public class Settings extends AppCompatActivity {
         LogoutBtn.setOnClickListener(view->{
             mAuth.signOut();
             signOut();
+            LoginManager.getInstance().logOut();
             startActivity(new Intent(Settings.this,Login.class));
+            finish();
         });
 
         //connect database and retrieve data
@@ -129,6 +160,7 @@ public class Settings extends AppCompatActivity {
                 email.setText(emailTxt);
                 phoneNumber.setText(phoneNumberTxt);
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(Settings.this,"Something went wrong" ,Toast.LENGTH_SHORT).show();
@@ -259,5 +291,14 @@ public class Settings extends AppCompatActivity {
             reference.child(userID).child("equippedMusicAudio").setValue(music.getMusicAudio());
             dialog.dismiss();
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if(authStateListener != null){
+            mAuth.removeAuthStateListener(authStateListener);
+        }
     }
 }

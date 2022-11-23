@@ -147,7 +147,7 @@
                 android:gravity="center"
                 android:layout_marginTop="20dp">
 
-                <ImageView
+                <com.facebook.login.widget.LoginButton
                     android:id="@+id/facebook_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

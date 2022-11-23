@@ -51,4 +51,8 @@
     <string name="desc_two">When the timer goes on, an animated rabbit will be shown to motivate the user to study and not leave the session. </string>
     <string name="desc_three">Allow users to add, edit and delete notes.</string>
 
+    <string name="facebook_app_id">676531840627671</string>
+    <string name="fb_login_protocol_scheme">fb676531840627671</string>
+    <string name="facebook_client_token">795212cd0a464ae6830cd6ae55a079b8</string>
+
 </resources>
