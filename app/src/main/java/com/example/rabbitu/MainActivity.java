@@ -37,6 +37,8 @@ import java.io.IOException;
 import java.io.File;
 import java.util.ArrayList;
 
+import pl.droidsonroids.gif.GifImageButton;
+
 public class MainActivity extends AppCompatActivity {
 
     final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";

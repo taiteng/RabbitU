@@ -103,36 +103,31 @@ public class Settings extends AppCompatActivity {
             startActivity(new Intent(Settings.this,Login.class));
         });
 
+        //connect database and retrieve data
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
+                equippedMusicID = snapshot.child("equippedMusicID").getValue(String.class);
+                isMuteMusic = snapshot.child("isMuteMusic").getValue(boolean.class);
 
-                if(userProfile != null){
-                    equippedMusicID = snapshot.child("equippedMusicID").getValue(String.class);
-                    isMuteMusic = snapshot.child("isMuteMusic").getValue(boolean.class);
-
-                    if(isMuteMusic == true){
-                        MuteSwitch.setChecked(true);
-                    }
-                    else{
-                        MuteSwitch.setChecked(false);
-                    }
-
-                    coinsGet = snapshot.child("coins").getValue(int.class);
-                    coins.setText(String.valueOf(coinsGet));
-
-                    String fullNameTxt = userProfile.fullName;
-                    String emailTxt = userProfile.email;
-                    String phoneNumberTxt = userProfile.phoneNumber;
-
-                    name.setText(fullNameTxt);
-                    email.setText(emailTxt);
-                    phoneNumber.setText(phoneNumberTxt);
+                if(isMuteMusic == true){
+                    MuteSwitch.setChecked(true);
+                }
+                else{
+                    MuteSwitch.setChecked(false);
                 }
 
-            }
+                coinsGet = snapshot.child("coins").getValue(int.class);
+                coins.setText(String.valueOf(coinsGet));
 
+                String fullNameTxt = snapshot.child("fullName").getValue(String.class);
+                String emailTxt = snapshot.child("email").getValue(String.class);
+                String phoneNumberTxt = snapshot.child("phoneNumber").getValue(String.class);
+
+                name.setText(fullNameTxt);
+                email.setText(emailTxt);
+                phoneNumber.setText(phoneNumberTxt);
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(Settings.this,"Something went wrong" ,Toast.LENGTH_SHORT).show();
