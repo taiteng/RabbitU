@@ -47,6 +47,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
@@ -59,10 +60,10 @@ import java.util.List;
 public class Login extends AppCompatActivity {
     public static final int GOOGLE_SIGN_IN_CODE = 10005;
     private static final String TAG = "FacebookAuthentication";
-
-
+    final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";
     private FirebaseAuth.AuthStateListener authStateListener;
     private ActivityLoginBinding binding;
+    public String temp, currentUserUID;
     EditText emailLogin ;
     EditText passwordLogin ;
     TextView forgetTxt ;
@@ -73,7 +74,7 @@ public class Login extends AppCompatActivity {
     GoogleSignInClient signInClient;
     FirebaseAuth mAuth;
     CallbackManager callbackManager;
-    Boolean isNew;
+    Boolean isNew = false;
     DatabaseReference df;
 
     @Override
@@ -270,11 +271,13 @@ public class Login extends AppCompatActivity {
                     Log.d(TAG, "sign in with credential: successful");
                     Toast.makeText(Login.this, "Authentication Success with Facebook", Toast.LENGTH_SHORT).show();
                     FirebaseUser currentUser = mAuth.getCurrentUser();
-                    String currentUserUID = mAuth.getCurrentUser().getUid();
+                    currentUserUID = mAuth.getCurrentUser().getUid();
 
                     //Validate if the user is exist in firebase
-                    if(checkIfNewUser(currentUserUID) == false){
-                        HomeActivity(); //navigate to home
+                    boolean isNewUser = checkIfNewUser();
+
+                    if(!isNewUser){
+                        HomeActivity();
                     }else{
                         updateUser(currentUser); //create new user and navigate to home
                     }
@@ -286,6 +289,30 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private boolean checkIfNewUser(){
+        df = FirebaseDatabase.getInstance().getReference("Users");
+        df.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    temp = dataSnapshot.getKey().toString();
+                    if (temp.equals(currentUserUID.toString())){
+                        isNew = false;
+                    }
+                    else {
+                        isNew = true;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("The read failed: " + error.getCode());
+            }
+        });
+
+        return isNew;
     }
 
     private void updateUser(FirebaseUser user){
@@ -323,30 +350,7 @@ public class Login extends AppCompatActivity {
         }
     }
 
-    private boolean checkIfNewUser(final String userId){
-        DatabaseReference df = FirebaseDatabase.getInstance().getReference("Users");
 
-        // Attach a listener to read the data at our posts reference
-        df.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.getValue().equals(userId)) {
-                    System.out.println("Null value");
-                    //isNew = false;
-                }else{
-                    System.out.println("not null value");
-                    //isNew = true;
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-        System.out.println("ISNEW" + isNew);
-        return isNew;
-    }
 
 
 }
