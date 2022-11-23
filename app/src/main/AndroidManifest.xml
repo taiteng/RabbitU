@@ -74,6 +74,10 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".AddActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">

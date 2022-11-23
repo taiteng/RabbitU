@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -48,7 +49,8 @@ public class Notes extends AppCompatActivity {
         add = findViewById(R.id.btn_add);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                //Toast.makeText(Notes.this, "Nice" , Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(Notes.this,AddActivity.class));
             }
         });
