@@ -55,7 +55,6 @@ public class AdapterNotes extends RecyclerView.Adapter<AdapterNotes.MyViewHolder
         holder.title_name.setText("Title : " + data.getTitle());
         holder.description_name.setText("Description : " + data.getDesc());
 
-
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
