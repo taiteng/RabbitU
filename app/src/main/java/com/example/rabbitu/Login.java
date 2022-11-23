@@ -49,6 +49,8 @@ public class Login extends AppCompatActivity {
     GoogleSignInClient signInClient;
     FirebaseAuth mAuth;
 
+    public String admin = "admin@gmail.com";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,7 +151,14 @@ public class Login extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(Login.this,"User Log In successfully",Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Login.this,MainActivity.class));
+
+                        if(emailTxt.equals(admin)){
+                            Intent intent = new Intent(Login.this,Admin.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            startActivity(new Intent(Login.this,MainActivity.class));
+                        }
                     }
                     else{
                         Toast.makeText(Login.this,"Log In Error : " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
