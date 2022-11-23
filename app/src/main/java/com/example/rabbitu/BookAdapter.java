@@ -1,6 +1,7 @@
 package com.example.rabbitu;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,6 +41,7 @@ public class BookAdapter extends FirebaseRecyclerAdapter<PdfClass,BookAdapter.Vi
     List<String> bookList;
     private DatabaseReference coinReference;
     private int coin;
+    private Context mContext;
 
 
     public BookAdapter(@NonNull FirebaseRecyclerOptions<PdfClass> options) {
@@ -108,6 +110,9 @@ public class BookAdapter extends FirebaseRecyclerAdapter<PdfClass,BookAdapter.Vi
 
                                                             FirebaseDatabase.getInstance(firebaseURL).getReference().child("Users").child(userID).child("coins").setValue(coin-model.getCoin());
 
+                                                            mContext = holder.card.getContext();
+                                                            final Intent intent = new Intent(mContext, BookActivity.class);
+                                                            mContext.startActivity(intent);
                                                         }
                                                     })
                                                     .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

@@ -107,7 +107,7 @@
                     android:id="@+id/rabbitStudying"
                     android:layout_width="wrap_content"
                     android:layout_height="380dp"
-                    android:src="@drawable/rabbitu_studying"/>
+                    android:src="@drawable/rabbitu_studying" />
 
             </RelativeLayout>
 
