@@ -50,6 +50,7 @@ public class Settings extends AppCompatActivity {
     private String equippedMusicID = "";
     private int coinsGet = 0;
     private boolean isMuteMusic = false;
+    private boolean isActive = false;
 
     BottomNavigationView mBottomNavigationView;
     FirebaseAuth mAuth;

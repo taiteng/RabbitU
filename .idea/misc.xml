@@ -40,6 +40,7 @@
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_admin.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_admin_add_music.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_admin_book.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_admin_edit_book.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_admin_edit_music.xml" value="0.28055555555555556" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_admin_music.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_book.xml" value="0.25" />
@@ -47,6 +48,7 @@
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_leaderboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_login.xml" value="0.5" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_open_book.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_register.xml" value="0.45" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_settings.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/taite/AndroidStudioProjects/RabbitU/app/src/main/res/layout/activity_splashscreen.xml" value="0.1" />

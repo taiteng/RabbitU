@@ -15,10 +15,12 @@
         android:theme="@style/Theme.RabbitU">
         <activity
             android:name=".AdminEditBook"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OpenBook"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Settings"
             android:exported="true"
