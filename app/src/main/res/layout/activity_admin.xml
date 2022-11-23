@@ -3,24 +3,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Admin">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_book"
-        style="@style/themeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/crud_book"/>
+    <ScrollView
+        android:id="@+id/sticker_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_music"
-        style="@style/themeButton"
+        <LinearLayout
+            android:id="@+id/sticker_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/rabbitLove"
+                android:layout_width="wrap_content"
+                android:layout_height="380dp"
+                android:src="@drawable/rabbitu_love" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/rabbitHug"
+                android:layout_width="wrap_content"
+                android:layout_height="380dp"
+                android:src="@drawable/rabbitu_hug" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/button_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/btn_book"
-        android:layout_centerInParent="true"
-        android:text="@string/crud_music"/>
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_book"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:fabCustomSize="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            android:src="@drawable/book_icon_2"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_music"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            app:fabCustomSize="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            android:src="@drawable/music_note"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_popup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            android:src="@drawable/edit"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>
