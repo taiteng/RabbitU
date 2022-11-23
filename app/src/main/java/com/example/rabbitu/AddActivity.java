@@ -23,7 +23,6 @@ public class AddActivity extends AppCompatActivity {
 
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,28 +46,20 @@ public class AddActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("Users")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .child("Notes").push().setValue(new ModelNotes(getName,getDesc)).addOnSuccessListener(new OnSuccessListener<Void>() {
-                     @Override
-                     public void onSuccess(Void unused) {
-                         Toast.makeText(AddActivity.this,"Notes added ! ",Toast.LENGTH_SHORT).show();
-                         startActivity(new Intent(AddActivity.this,Notes.class));
-                        finish();
-                     }
-                 }).addOnFailureListener(new OnFailureListener() {
-                     @Override
-                     public void onFailure(@NonNull Exception e) {
-                         Toast.makeText(AddActivity.this," Failed to add Notes ! ",Toast.LENGTH_SHORT).show();
-                     }
-                 });
-
-
-
+                         @Override
+                         public void onSuccess(Void unused) {
+                             Toast.makeText(AddActivity.this,"Notes added ! ",Toast.LENGTH_SHORT).show();
+                             startActivity(new Intent(AddActivity.this,Notes.class));
+                             finish();
+                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                         @Override
+                         public void onFailure(@NonNull Exception e) {
+                             Toast.makeText(AddActivity.this," Failed to add Notes ! ",Toast.LENGTH_SHORT).show();
+                         }
+                    });
                 }
             }
         });
-
-
-
-
-
     }
 }

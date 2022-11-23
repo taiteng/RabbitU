@@ -96,7 +96,7 @@ public class Register extends AppCompatActivity {
                         List<String> bookList=new ArrayList<>();
                         bookList.add("Computer Science");
                         bookList.add("Computer System");
-                        User user = new User (fullnameTxt, phoneTxt, emailTxt, equippedMusicID, equippedMusicAudio, coins, false,bookList);
+                        User user = new User (fullnameTxt, phoneTxt, emailTxt, equippedMusicID, equippedMusicAudio, coins, false, bookList);
 
                         FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

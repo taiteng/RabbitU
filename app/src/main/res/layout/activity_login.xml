@@ -145,20 +145,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
 
-                <ImageView
+                <com.facebook.login.widget.LoginButton
                     android:id="@+id/facebook_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_facebook"/>
+                    android:src="@drawable/ic_facebook"
+                    android:layout_marginBottom="10dp" />
 
                 <ImageView
                     android:id="@+id/google_login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_google_plus"
-                    android:layout_marginLeft="10dp"/>
+                    android:src="@drawable/ic_google_plus" />
 
             </LinearLayout>
 

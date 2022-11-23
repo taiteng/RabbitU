@@ -15,14 +15,14 @@ public class User {
     }
 
     public User(String fullName, String phoneNumber, String email, String equippedMusicID, String equippedMusicAudio, int coins, boolean isMuteMusic, List<String> bookList){
-            this.fullName = fullName ;
-            this.phoneNumber = phoneNumber ;
-            this.email = email ;
-            this.equippedMusicID = equippedMusicID;
-            this.equippedMusicAudio = equippedMusicAudio;
-            this.coins = coins;
-            this.isMuteMusic = isMuteMusic;
-            this.bookList= bookList;
+        this.fullName = fullName ;
+        this.phoneNumber = phoneNumber ;
+        this.email = email ;
+        this.equippedMusicID = equippedMusicID;
+        this.equippedMusicAudio = equippedMusicAudio;
+        this.coins = coins;
+        this.isMuteMusic = isMuteMusic;
+        this.bookList= bookList;
     }
 
     public String getFullName() {
