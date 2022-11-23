@@ -8,16 +8,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/admin_recycler_view"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/half_rounded"
-        app:itemIconTint="@color/nav_color"
-        app:itemTextColor="@color/nav_color"
-        app:menu="@menu/menu" />
+        android:id="@+id/admin_recycler_view" />
 
 </RelativeLayout>

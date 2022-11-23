@@ -27,7 +27,7 @@ public class Admin extends AppCompatActivity {
         bookBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Admin.this,AdminBook.class));
+                startActivity(new Intent(Admin.this,AdminEditBook.class));
             }
         });
 

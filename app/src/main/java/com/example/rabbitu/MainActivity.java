@@ -2,6 +2,7 @@ package com.example.rabbitu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -33,11 +34,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
-
-import java.io.File;
-import java.util.ArrayList;
-
-import pl.droidsonroids.gif.GifImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -394,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Put the selection of menu on item1 on resume
+     * Put the selection of menu on item1 onResume
      */
     @Override
     protected void onResume() {

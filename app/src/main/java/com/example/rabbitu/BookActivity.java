@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -58,31 +59,11 @@ public class BookActivity extends AppCompatActivity {
 
         recyclerView=findViewById(R.id.recycler_view);
 
-//        userReference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if(snapshot.exists()){
-//                     User user=(User) snapshot.getValue(User.class);
-//                     coins=user.getCoins();
-//                     bookList=user.getBookList();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                    throw error.toException();
-//            }
-//        });
-       // Toast.makeText(this,coins,Toast.LENGTH_SHORT).show();
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FirebaseRecyclerOptions <PdfClass> options=new FirebaseRecyclerOptions.Builder<PdfClass>().setQuery(
                 databaseReference,PdfClass.class
         ).build();
 
-//        ArrayList<Book> books = new ArrayList<>();
-//        books.add(new Book("Java", "Java Book.pdf", R.drawable.java_book));
-//        books.add(new Book("Coding Theory", "Coding Theory.pdf", R.drawable.coding_theory));
         bookAdapter = new BookAdapter(options);
 
         recyclerView.setAdapter(bookAdapter);
