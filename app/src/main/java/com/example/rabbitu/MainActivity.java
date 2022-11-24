@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                     long intervalOnPause = (SystemClock.elapsedRealtime() - mlastStopTime);
                     timerChronometer.setBase(timerChronometer.getBase() + intervalOnPause);
                     isReset = false;
+                    pauseTimerPause();
                 }
                 timerChronometer.start();
 
@@ -342,11 +343,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 //show dialog
+                Toast.makeText(MainActivity.this,"Pause Session Over!" ,Toast.LENGTH_SHORT).show();
                 failedStudy();
             }
         }.start();
 
         mTimerRunning = true;
+    }
+
+    //Pause timer for pausing study session
+    private void pauseTimerPause(){
+        if(mTimerRunning){
+            mCountDownTimer.cancel();
+            mTimerRunning = false;
+        }
     }
 
     //End timer for pausing study session
