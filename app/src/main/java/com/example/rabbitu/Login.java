@@ -76,6 +76,7 @@ public class Login extends AppCompatActivity {
     CallbackManager callbackManager;
     Boolean isNew = false;
     DatabaseReference df;
+    FirebaseAuth.AuthStateListener mAuthListener;
 
     public String admin = "admin@gmail.com";
 
@@ -86,6 +87,10 @@ public class Login extends AppCompatActivity {
         //for changing status bar icon colors
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser()!=null){
+            startActivity(new Intent(Login.this,MainActivity.class));
         }
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -101,7 +106,9 @@ public class Login extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         facebookLogin.setReadPermissions("email", "public_profile");
 
-        mAuth = FirebaseAuth.getInstance();
+
+
+
 
         facebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
