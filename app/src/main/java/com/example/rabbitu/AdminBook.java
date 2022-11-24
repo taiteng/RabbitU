@@ -140,6 +140,7 @@ public class AdminBook extends AppCompatActivity {
                 PdfClass pdfClass=new PdfClass(editText.getText().toString(),uri.toString(),book.toString(),authorText.getText().toString(),Integer.valueOf(coinText.getText().toString()));
                 databaseReference.child(databaseReference.push().getKey()).setValue(pdfClass);
                 Toast.makeText(AdminBook.this,"File uploaded",Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
 
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
