@@ -18,6 +18,7 @@
     <string name="home_text">Home</string>
     <string name="exit_text">Exit</string>
     <string name="crud_book">CRUD Book</string>
+    <string name="add_book">Add Book</string>
     <string name="crud_music">CRUD Music</string>
     <string name="add_music">Add Music</string>
     <string name="edit_music">Edit Music</string>

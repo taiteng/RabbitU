@@ -151,5 +151,9 @@ public class AdminBook extends AppCompatActivity {
         });
     }
 
-
+    //Back button
+    public void onBackClick(View View){
+        Intent intent = new Intent(AdminBook.this,AdminEditBook.class);
+        startActivity(intent);
+    }
 }
