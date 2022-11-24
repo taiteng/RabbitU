@@ -6,5 +6,6 @@
     <dimen name="loginViewsMargin">20dp</dimen>
     <dimen name="standard_65">65dp</dimen>
     <dimen name="standard_120">120dp</dimen>
+    <dimen name="standard_175">175dp</dimen>
 
 </resources>
