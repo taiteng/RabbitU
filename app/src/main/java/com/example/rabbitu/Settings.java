@@ -106,8 +106,10 @@ public class Settings extends AppCompatActivity {
                 try {
                     String fullName = jsonObject.getString("name");
                     String email = jsonObject.getString("email");
+                    String phoneNum = "0123456789";
                     name.setText(fullName);
                     mail.setText(email);
+                    phoneNumber.setText(phoneNum);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

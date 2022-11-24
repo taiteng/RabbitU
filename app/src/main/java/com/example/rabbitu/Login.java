@@ -106,6 +106,14 @@ public class Login extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         facebookLogin.setReadPermissions("email", "public_profile");
 
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+
+        //If user did not logout, go to home page
+        if(accessToken != null && accessToken.isExpired() == false){
+            startActivity(new Intent(Login.this, MainActivity.class));
+            finish();
+        }
+
         facebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
