@@ -90,7 +90,12 @@ public class Login extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(Login.this, MainActivity.class));
+            if(getIntent().hasExtra("isNewUser")){
+                startActivity(new Intent(Login.this,OnBoarding.class));
+            }
+            else{
+                startActivity(new Intent(Login.this,MainActivity.class));
+            }
         }
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -358,7 +363,9 @@ public class Login extends AppCompatActivity {
                         }
                     });
 
-            HomeActivity();
+            finish();
+            Intent intent = new Intent(Login.this,OnBoarding.class);
+            startActivity(intent);
         }
     }
 
