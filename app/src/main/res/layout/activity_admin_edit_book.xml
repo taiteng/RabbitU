@@ -3,11 +3,57 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_200">
+
+        <ImageView
+            android:id="@+id/back_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:onClick="onBackClick"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/crud_book"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="30dp"/>
+
+    </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/admin_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/admin_recycler_view" />
+        android:layout_below="@+id/top_bar" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/add_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerInParent="true"
+        android:layout_marginEnd="-60dp"
+        android:rotation="90"
+        android:text="@string/add_book"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:theme="@style/MaterialTheme"
+        app:backgroundTint="@color/purple_700"
+        app:icon="@drawable/icon_add"
+        app:iconTint="@android:color/white" />
 
 </RelativeLayout>

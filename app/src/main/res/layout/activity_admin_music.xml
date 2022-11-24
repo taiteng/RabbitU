@@ -24,10 +24,11 @@
             android:src="@drawable/back" />
 
         <TextView
+            android:id="@+id/page_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/crud_book"
+            android:text="@string/crud_music"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="30dp"/>
