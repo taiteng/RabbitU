@@ -88,6 +88,11 @@ public class Login extends AppCompatActivity {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser()!=null){
+            startActivity(new Intent(Login.this, MainActivity.class));
+        }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View v = binding.getRoot();
         setContentView(v);
@@ -100,8 +105,6 @@ public class Login extends AppCompatActivity {
         facebookLogin = findViewById(R.id.facebook_login);
         callbackManager = CallbackManager.Factory.create();
         facebookLogin.setReadPermissions("email", "public_profile");
-
-        mAuth = FirebaseAuth.getInstance();
 
         facebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
