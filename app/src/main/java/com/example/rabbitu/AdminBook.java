@@ -142,6 +142,8 @@ public class AdminBook extends AppCompatActivity {
                 Toast.makeText(AdminBook.this,"File uploaded",Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
 
+                startActivity(new Intent(AdminBook.this,AdminEditBook.class));
+
             }
         }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
