@@ -43,6 +43,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,9 +62,8 @@ public class Login extends AppCompatActivity {
     public static final int GOOGLE_SIGN_IN_CODE = 10005;
     private static final String TAG = "FacebookAuthentication";
     final String firebaseURL = "https://rabbitu-ae295-default-rtdb.firebaseio.com/";
-    private FirebaseAuth.AuthStateListener authStateListener;
     private ActivityLoginBinding binding;
-    public String temp, currentUserUID;
+    String temp, currentUserUID;
     EditText emailLogin ;
     EditText passwordLogin ;
     TextView forgetTxt ;
@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity {
     GoogleSignInClient signInClient;
     FirebaseAuth mAuth;
     CallbackManager callbackManager;
-    Boolean isNew = false;
+    Boolean isNew;
     DatabaseReference df;
 
     public String admin = "admin@gmail.com";
@@ -266,7 +266,8 @@ public class Login extends AppCompatActivity {
             } catch (ApiException e) {
                 Toast.makeText(getApplicationContext(),"Something went wrong" + signInTask.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }else{
+        }
+        else{
             // Pass the activity result back to the Facebook SDK
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
@@ -295,17 +296,24 @@ public class Login extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Log.d(TAG, "sign in with credential: successful");
                     Toast.makeText(Login.this, "Authentication Success with Facebook", Toast.LENGTH_SHORT).show();
+
                     FirebaseUser currentUser = mAuth.getCurrentUser();
-                    currentUserUID = mAuth.getCurrentUser().getUid();
+                    currentUserUID = currentUser.getUid();
+
+                    System.out.println("Current user name" + currentUser.getDisplayName());
+                    System.out.println("Current user uid" + currentUserUID);
 
                     //Validate if the user is exist in firebase
-                    boolean isNewUser = checkIfNewUser();
+                    //Boolean isNewUser = checkIfNewUser(currentUserUID);
+                    checkIfNewUser(currentUser);
 
-                    if(!isNewUser){
-                        HomeActivity();
-                    }else{
-                        updateUser(currentUser); //create new user and navigate to home
-                    }
+//                    if(isNewUser){
+//                        updateUser(currentUser); //create new user and navigate to home
+//                        System.out.println("update success");
+//                    }else{
+//                        System.out.println("old user no update");
+//                        HomeActivity();
+//                    }
 
 
                 }else{
@@ -316,7 +324,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private boolean checkIfNewUser(){
+    private void checkIfNewUser(FirebaseUser currentUser){
         df = FirebaseDatabase.getInstance().getReference("Users");
         df.addValueEventListener(new ValueEventListener() {
             @Override
@@ -324,11 +332,20 @@ public class Login extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     temp = dataSnapshot.getKey().toString();
                     if (temp.equals(currentUserUID.toString())){
+                        HomeActivity();
+                        System.out.println("user found");
+
                         isNew = false;
+                        break;
                     }
                     else {
                         isNew = true;
+                        System.out.println("no user found");
                     }
+                }
+
+                if(isNew){
+                    createUser(currentUser); //create new user and navigate to home
                 }
             }
             @Override
@@ -336,11 +353,9 @@ public class Login extends AppCompatActivity {
                 System.out.println("The read failed: " + error.getCode());
             }
         });
-
-        return isNew;
     }
 
-    private void updateUser(FirebaseUser user){
+    private void createUser(FirebaseUser user){
         if(user != null){
             String fullName = user.getDisplayName();
             String email = user.getEmail();
