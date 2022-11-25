@@ -75,13 +75,14 @@ public class Leaderboard extends AppCompatActivity {
                 String nameValue = snapshot.child("fullName").getValue().toString();
                 String coinsValue = snapshot.child("coins").getValue().toString();
 
-                nameList.add(nameValue);
-                coinList.add(coinsValue);
+                //Not including admin in the leaderboard
+                if(nameValue.equals("admin")){
 
+                }else{
+                    nameList.add(nameValue);
+                    coinList.add(coinsValue);
+                }
 
-
-                System.out.println(nameValue);
-                System.out.println(coinsValue);
                 leaderboardAdapter.notifyDataSetChanged();
             }
 
