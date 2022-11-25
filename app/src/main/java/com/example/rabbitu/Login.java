@@ -89,8 +89,10 @@ public class Login extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser()!=null){
+        if(mAuth.getCurrentUser()!=null || isNew != null){
             if(getIntent().hasExtra("isNewUser")){
+                startActivity(new Intent(Login.this,OnBoarding.class));
+            }else if(isNew){
                 startActivity(new Intent(Login.this,OnBoarding.class));
             }
             else{
@@ -300,22 +302,7 @@ public class Login extends AppCompatActivity {
                     FirebaseUser currentUser = mAuth.getCurrentUser();
                     currentUserUID = currentUser.getUid();
 
-                    System.out.println("Current user name" + currentUser.getDisplayName());
-                    System.out.println("Current user uid" + currentUserUID);
-
-                    //Validate if the user is exist in firebase
-                    //Boolean isNewUser = checkIfNewUser(currentUserUID);
                     checkIfNewUser(currentUser);
-
-//                    if(isNewUser){
-//                        updateUser(currentUser); //create new user and navigate to home
-//                        System.out.println("update success");
-//                    }else{
-//                        System.out.println("old user no update");
-//                        HomeActivity();
-//                    }
-
-
                 }else{
                     Log.d(TAG, "sign in with credential: failure", task.getException());
                     Toast.makeText(Login.this, "Authentication Failed with Facebook", Toast.LENGTH_SHORT).show();
@@ -333,14 +320,11 @@ public class Login extends AppCompatActivity {
                     temp = dataSnapshot.getKey().toString();
                     if (temp.equals(currentUserUID.toString())){
                         HomeActivity();
-                        System.out.println("user found");
-
                         isNew = false;
                         break;
                     }
                     else {
                         isNew = true;
-                        System.out.println("no user found");
                     }
                 }
 
@@ -359,7 +343,7 @@ public class Login extends AppCompatActivity {
         if(user != null){
             String fullName = user.getDisplayName();
             String email = user.getEmail();
-            String phone = user.getPhoneNumber();
+            String phone = "0123456789";
             String equippedMusicID = "Lofi1";
             String equippedMusicAudio = "https://firebasestorage.googleapis.com/v0/b/rabbitu-ae295.appspot.com/o/Eric%20Godlow%20Beats%20-%20follow%20me.mp3?alt=media&token=a5723865-1f95-4e46-818d-935192f427f0";
             int coins = 0;
@@ -378,6 +362,8 @@ public class Login extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(Login.this,"User Registered successfully",Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Login.this,OnBoarding.class);
+                                startActivity(intent);
 
                             }else{
                                 Toast.makeText(Login.this,"Fail to Register ! Try again ! ",Toast.LENGTH_SHORT).show();
@@ -386,9 +372,7 @@ public class Login extends AppCompatActivity {
                         }
                     });
 
-            finish();
-            Intent intent = new Intent(Login.this,OnBoarding.class);
-            startActivity(intent);
+
         }
     }
 
