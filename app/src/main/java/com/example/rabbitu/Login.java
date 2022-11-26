@@ -89,10 +89,10 @@ public class Login extends AppCompatActivity {
         }
 
         mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser()!=null || isNew != null){
+        if(mAuth.getCurrentUser() != null || isNew != null){
             if(getIntent().hasExtra("isNewUser")){
                 startActivity(new Intent(Login.this,OnBoarding.class));
-            }else if(isNew){
+            }else if(isNew != null && isNew == true){
                 startActivity(new Intent(Login.this,OnBoarding.class));
             }
             else{

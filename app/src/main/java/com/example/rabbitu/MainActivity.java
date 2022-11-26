@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
                 //start animation
                 arrowImg.startAnimation(roundingalone);
 
+                totalSecondsStudied = 0;
+
                 //show and hide buttons
                 pauseBtn.animate().alpha(1).setDuration(300).start();
                 startBtn.animate().alpha(0).setDuration(300).start();
@@ -290,7 +292,6 @@ public class MainActivity extends AppCompatActivity {
     public int countCoins(){
         long elapsedMillis = SystemClock.elapsedRealtime() - timerChronometer.getBase();
         double seconds = elapsedMillis/1000.00;
-        //int coinsGet = (int)seconds/60;
         int coinsGet = (int)seconds/1;
 
         return coinsGet;
