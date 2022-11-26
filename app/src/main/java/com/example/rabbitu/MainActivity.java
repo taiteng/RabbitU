@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     public int coinsEarned = 0;
     private boolean isMuteMusic = false;
     private String musicAudio = "";
-    private static  final long START_TIME_IN_MILLIS = 600000;
+    private static  final long START_TIME_IN_MILLIS = 6000;
     private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning = false;
@@ -333,7 +333,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //Start timer for pausing study session
+    /**
+     * Start timer for pausing study session
+     */
     private void startTimerPause(){
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -352,7 +354,9 @@ public class MainActivity extends AppCompatActivity {
         mTimerRunning = true;
     }
 
-    //Pause timer for pausing study session
+    /**
+     * Pause timer for pausing study session
+     */
     private void pauseTimerPause(){
         if(mTimerRunning){
             mCountDownTimer.cancel();
@@ -360,7 +364,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //End timer for pausing study session
+    /**
+     * End timer for pausing study session
+     */
     private void endTimerPause(){
         if(mTimerRunning){
             mCountDownTimer.cancel();
@@ -397,6 +403,21 @@ public class MainActivity extends AppCompatActivity {
         //Closes the alert dialog box
         exitButton.setOnClickListener(v -> {
             dialog.dismiss();
+
+            //reset chronometer
+            timerChronometer.setBase(SystemClock.elapsedRealtime());
+
+            //show and hide buttons
+            startBtn.animate().alpha(1).setDuration(300).start();
+            startBtn.setText("Start");
+            resetBtn.animate().alpha(0).setDuration(300).start();
+
+            if(pauseBtn.getAlpha() == 1){
+                pauseBtn.animate().alpha(0).setDuration(300).start();
+            }
+
+            //reset
+            isReset = true;
         });
     }
 
