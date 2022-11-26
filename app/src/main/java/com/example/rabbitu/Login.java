@@ -329,7 +329,7 @@ public class Login extends AppCompatActivity {
                 }
 
                 if(isNew){
-                    createUser(currentUser); //create new user and navigate to home
+                    createFacebookUser(currentUser); //create new user and navigate to home
                 }
             }
             @Override
@@ -339,7 +339,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void createUser(FirebaseUser user){
+    private void createFacebookUser(FirebaseUser user){
         if(user != null){
             String fullName = user.getDisplayName();
             String email = user.getEmail();
